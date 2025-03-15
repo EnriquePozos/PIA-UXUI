@@ -22,9 +22,8 @@ header {
 }
 
 .logo {
-    font-size: 22px;
-    font-weight: bold;
-    color: #D74B4B;
+    width: 10rem;
+    height: 8em;
 }
 
 .btn-comprar {
