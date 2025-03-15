@@ -5,6 +5,7 @@ body {
     margin: 0;
     padding: 0;
     text-align: center;
+    /* background-color: #333; */
 }
 
 /* Encabezado */
@@ -17,7 +18,12 @@ header {
 }
 
 .menu i {
-    font-size: 24px;
+    background-color: #eb8f55;
+    padding: 15px 20px;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-size: 32px;
+    color: whitesmoke;
     cursor: pointer;
 }
 
@@ -59,6 +65,10 @@ h2 {
     border-radius: 20px;
     cursor: pointer;
     margin-top: 15px;
+}
+
+.btn-compra:hover {
+    background: #e67b7b;
 }
 
 /* Pie de página */
