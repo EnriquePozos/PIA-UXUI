@@ -1,5 +1,4 @@
 /* Estilos generales */
-/* Estilos generales */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -29,16 +28,7 @@ header {
 
 .logo {
     width: 10rem;
-    height: 8em;
-}
-
-.btn-comprar {
-    background: #D74B4B;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 20px;
-    cursor: pointer;
+    height: 5em;
 }
 
 /* Contenido principal */
@@ -47,6 +37,7 @@ h2 {
 }
 
 .productos {
+    list-style: none;
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -54,7 +45,16 @@ h2 {
 }
 
 .productos img {
-    width: 150px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease in-out;
+    border-radius: 10px;
+}
+
+.producto:hover img {
+    cursor: pointer;
+    transform: scale(1.2);
 }
 
 .btn-compra {
@@ -65,6 +65,12 @@ h2 {
     border-radius: 20px;
     cursor: pointer;
     margin-top: 15px;
+}
+
+#btnCompraHeader {
+    font-size: 28px;
+    padding: 20px 20px;
+    border-radius: 15em;
 }
 
 .btn-compra:hover {
@@ -89,6 +95,10 @@ footer a {
 
 footer i {
     margin-right: 5px;
+}
+
+footer a:hover{
+    color: red;
 }
 
 /* Media Queries para Responsividad */
