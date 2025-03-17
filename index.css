@@ -20,6 +20,46 @@ header {
     z-index: 1000;
 }
 
+/* Estilos para el popup-menu (menú lateral) */
+.popup-menu {
+    position: fixed;
+    top: 6.7rem;
+    left: -100%; /* Inicialmente está fuera de la pantalla */
+    width: 250px;
+    height: 100%;
+    background-color: #eb8f55;
+    opacity: 0.9;
+    transition: left 0.3s ease;
+}
+
+.popup-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.popup-menu li {
+    padding: 15px;
+    text-align: center;
+}
+
+.popup-menu a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.popup-menu a:hover {
+    color: #D74B4B;
+    text-decoration: none;
+    display: block;
+}
+
+.menu {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+
 /* Ícono Menú */
 .menu i {
     background-color: #eb8f55;
@@ -33,7 +73,7 @@ header {
 .menu i:hover,
 .menu i:focus {
     background-color: #f0a76b;
-    outline: 2px dashed black;
+    outline: 2px solid black;
 }
 
 /* Logo */
