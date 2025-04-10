@@ -1,0 +1,104 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #fff;
+    color: #000;
+}
+
+/* Encabezado */
+header {
+    position: sticky;
+    top: 0;
+    background: #FFC672;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    z-index: 1000;
+}
+
+/* Estilos para el popup-menu (menú lateral) */
+.popup-menu {
+    position: fixed;
+    top: 6.7rem;
+    left: -100%; /* Inicialmente está fuera de la pantalla */
+    width: 250px;
+    height: 100%;
+    background-color: #eb8f55;
+    opacity: 0.9;
+    transition: left 0.3s ease;
+}
+
+.popup-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.popup-menu li {
+    padding: 15px;
+    text-align: center;
+}
+
+.popup-menu a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.popup-menu a:hover {
+    color: #D74B4B;
+    text-decoration: none;
+    display: block;
+}
+
+.menu {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+
+/* Ícono Menú */
+.menu i {
+    background-color: #eb8f55;
+    padding: 12px 16px;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-size: 28px;
+    color: #fff;
+    cursor: pointer;
+}
+.menu i:hover,
+.menu i:focus {
+    background-color: #f0a76b;
+    outline: 2px solid black;
+}
+
+/* Logo */
+.logo {
+    width: 8rem;
+    height: auto;
+}
+
+/* Botón Compra */
+.btn-compra {
+    background: #D74B4B;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 15px;
+    font-size: 1rem;
+}
+.btn-compra:hover,
+.btn-compra:focus {
+    background: #e67b7b;
+    outline: 2px solid #000;
+}
+#btnCompraHeader {
+    font-size: 18px;
+    padding: 10px 20px;
+}
