@@ -102,3 +102,28 @@ header {
     font-size: 18px;
     padding: 10px 20px;
 }
+
+/* Footer */
+footer {
+    background: #FFE6B3;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    font-size: 0.95rem;
+}
+footer a {
+    display: block;
+    text-decoration: none;
+    color: #000;
+    margin: 5px 0;
+    text-align: start;
+}
+footer a:hover,
+footer a:focus {
+    color: #D74B4B;
+    text-decoration: underline;
+}
+footer i {
+    margin-right: 5px;
+}
