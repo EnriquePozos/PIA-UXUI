@@ -5,29 +5,32 @@
     --bg-color: #ffffff;
     --text-color: #24292f;
     --border-color: #d0d7de;
-    --header-bg: #FFC672; /* Mantenemos el color original del header */
+    --header-bg: #FFC672; /*Mantenemos el color original del header  */
     --accent-color: #0969da;
     --highlight-bg: #f6f8fa;
     --dropdown-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);
     --popup-menu-bg: #eb8f55; /* Color original del menú */
     --btn-compra-bg: #D74B4B; /* Color original del botón compra */
     --btn-compra-hover: #e67b7b; /* Color original hover del botón compra */
-    --footer-bg: #FFE6B3; /* Color original del footer */
+    --footer-bg: #FFC672; /* Color original del footer */
 }
 
 /* Variables para tema oscuro */
 [data-theme="dark"] {
-    --bg-color: #0d1117;
+    /* --bg-color: #0d1117; */
+    --bg-color: #333; /* Versión oscura del fondo original */
     --text-color: #c9d1d9;
-    --border-color: #30363d;
-    --header-bg: #d39344; /* Versión oscura del header original */
+    /* --border-color: #30363d; */
+    --border-color: #ffff; /* Versión oscura del borde original */
+    /* --header-bg: #d39344; Versión oscura del header original */
+    --header-bg: #757574; /* Color original del header */
     --accent-color: #58a6ff;
     --highlight-bg: #21262d;
     --dropdown-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     --popup-menu-bg: #b06b3f; /* Versión oscura del menú original */
     --btn-compra-bg: #ac3c3c; /* Versión oscura del botón */
     --btn-compra-hover: #c05a5a; /* Versión oscura hover del botón */
-    --footer-bg: #d39344; /* Versión oscura del footer original */
+    --footer-bg: #757574; /* Versión oscura del footer original */
 }
 
 /* Estilos para que la página se adapte al tema */

@@ -10,9 +10,40 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="compra.css">
-
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="theme.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          // Aplicar tema guardado o preferencia del sistema
+          const savedTheme = localStorage.getItem('theme');
+          const syncWithSystem = localStorage.getItem('syncWithSystem') === 'true';
+          
+          function applyTheme(theme) {
+            if (theme === 'dark') {
+              document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+              document.documentElement.removeAttribute('data-theme');
+            }
+          }
+          
+          if (syncWithSystem) {
+            // Detectar preferencia del sistema
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(prefersDark ? 'dark' : 'light');
+            
+            // Escuchar cambios en preferencia del sistema
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+              applyTheme(e.matches ? 'dark' : 'light');
+            });
+          } else {
+            // Aplicar tema guardado o tema claro por defecto
+            applyTheme(savedTheme || 'light');
+          }
+        });
+    </script>
   
 </head>
 <body>
@@ -24,6 +55,16 @@
         <!--<h1 class="logo">Penny <span>Juice</span></h1>-->
         <button id="btnCompraHeader" class="btn-compra">Comprar</button>
     </header>
+
+    <aside id="popupMenu" class="popup-menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="compra.html">Compra</a></li>
+            <li><a href="InfoNutrimental.html">Información nutrimental</a></li>
+            <li><a href="#">Contacto</a></li>
+            <li><a href="configuracion.html">Configuración</a></li>
+        </ul>
+    </aside>
 
     <main>
         <div class="producto-contenedor">
@@ -68,7 +109,8 @@
             <a href=""><i class="fas fa-envelope"></i> pennyjuice@hotmail.com</a>
         </div>
     </footer>
-    
+
+    <script src="compra.js"></script>
+    <script src="popupMenu.js"></script>
 </body>
-<script src="compra.js"></script>
 </html>
