@@ -56,11 +56,10 @@
 
     <aside id="popupMenu" class="popup-menu">
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="compra.html">Compra</a></li>
-            <li><a href="InfoNutrimental.html">Información nutrimental</a></li>
-            <li><a href="#">Contacto</a></li>
-            <li><a href="configuracion.html">Configuración</a></li>
+            <li><a href="index.html" aria-label="Home" id="Home">Home</a></li>
+            <li><a href="compra.html" aria-label="Compra" id="Compra">Compra</a></li>
+            <li><a href="InfoNutrimental.html" aria-label="Informacion_Nutrimental" id = "Informacion_Nutrimental">Información nutrimental</a></li>
+            <li><a href="configuracion.html" aria-label="Configuración" id="Configuración">Configuración</a></li>
         </ul>
     </aside>
 
@@ -74,28 +73,27 @@
                eso luego lo vemos primero las pantallas-->
             </ol>
         </nav>
-
         <h2>Productos destacados</h2>
-        
+
         <ul class="productos">
             <li class="producto">
-                <img src="imagenes/jugo-gastro.jpg" alt="Producto 1">
+                <img src="imagenes/jugo-gastro.png" alt="Producto 1">
             </li>
 
             <li class="producto">
-                <img src="imagenes/jugo-defensa.jpg" alt="Producto 2">
+                <img src="imagenes/jugo-defensa.png" alt="Producto 2">
             </li>
-            
+
             <li class="producto">
-                <img src="imagenes/jugo-vista.jpg" alt="Producto 3">
+                <img src="imagenes/jugo-antiox.png" alt="Producto 3">
             </li>
         </ul>
-        
 
-        <button class="btn-compra">¡COMPRA YA!</button>
+
+        <a href="compra.html"><button class="btn-compra" id="btn-compra">¡COMPRA YA!</button></a>
     </main>
 
-    <footer>
+    <footer id="footer">
         <div class="social">
             <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
             <a href="https://www.facebook.com/PENNYJUICE/" target="_blank">
