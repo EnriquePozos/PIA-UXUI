@@ -80,13 +80,12 @@
     </header>
 
     <aside id="popupMenu" class="popup-menu">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="compra.html">Compra</a></li>
-        <li><a href="InfoNutrimental.html">Información nutrimental</a></li>
-        <li><a href="#">Contacto</a></li>
-        <li><a href="configuracion.html">Configuración</a></li>
-      </ul>
+        <ul>
+            <li><a href="index.html" aria-label="Home" id="Home">Home</a></li>
+            <li><a href="compra.html" aria-label="Compra" id="Compra">Compra</a></li>
+            <li><a href="InfoNutrimental.html" aria-label="Informacion_Nutrimental" id = "Informacion_Nutrimental">Información nutrimental</a></li>
+            <li><a href="configuracion.html" aria-label="Configuración" id="Configuración">Configuración</a></li>
+        </ul>
     </aside>
 
     <main>
@@ -98,48 +97,48 @@
           <li class="breadcrumb-item"><a href="compra.html">Compra</a></li>
           <!--Con JS vamos a ir aumentando los li o disminuyendolos dependiendo lo que se haga
                eso luego lo vemos primero las pantallas-->
-        </ol>
-      </nav>
+            </ol>
+        </nav>
+        <h2>Productos destacados</h2>
 
-      <h2>Productos destacados</h2>
+        <ul class="productos">
+            <li class="producto">
+                <img src="imagenes/jugo-gastro.png" alt="Producto 1">
+            </li>
 
-      <ul class="productos">
-        <li class="producto">
-          <img src="imagenes/jugo-gastro.jpg" alt="Producto 1" />
-        </li>
+            <li class="producto">
+                <img src="imagenes/jugo-defensa.png" alt="Producto 2">
+            </li>
 
-        <li class="producto">
-          <img src="imagenes/jugo-defensa.jpg" alt="Producto 2" />
-        </li>
+            <li class="producto">
+                <img src="imagenes/jugo-antiox.png" alt="Producto 3">
+            </li>
+        </ul>
 
-        <li class="producto">
-          <img src="imagenes/jugo-vista.jpg" alt="Producto 3" />
-        </li>
-      </ul>
 
-      <button class="btn-compra">¡COMPRA YA!</button>
+        <a href="compra.html"><button class="btn-compra" id="btn-compra">¡COMPRA YA!</button></a>
     </main>
 
-    <footer>
-      <div class="social">
-        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-        <a href="https://www.facebook.com/PENNYJUICE/" target="_blank">
-          <i class="fab fa-facebook"></i> Facebook
-        </a>
-        <a href="https://x.com/1PENNYJUICE" target="_blank">
-          <i class="fab fa-twitter"></i> Twitter
-        </a>
-      </div>
-      <div class="contact">
-        <a href="#"><i class="fas fa-phone"></i> 563-386-1999</a>
-        <a
-          href="https://www.google.com.mx/maps/place/PENNY+JUICE+OF+AMERICA/@41.5705654,-90.5664843,17z/data=!4m6!3m5!1s0x87e235a7cf4d89dd:0x64956b682ec0c88c!8m2!3d41.5705655!4d-90.5616134!16s%2Fg%2F1tjkgbnc?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoASAFQAw%3D%3D"
-          target="_blank"
-        >
-          <i class="fas fa-map-marker-alt"> </i> Ubicación
-        </a>
-        <a href=""><i class="fas fa-envelope"></i> pennyjuice@hotmail.com</a>
-      </div>
+    <footer id="footer">
+        <div class="social">
+            <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="https://www.facebook.com/PENNYJUICE/" target="_blank">
+                <i class="fab fa-facebook"></i> Facebook
+            </a>
+            <a href="https://x.com/1PENNYJUICE" target="_blank">
+                <i class="fab fa-twitter"></i> Twitter
+            </a>
+        </div>
+        <div class="contact">
+            <a href="#"><i class="fas fa-phone"></i> 563-386-1999</a>
+            <a href="https://www.google.com.mx/maps/place/PENNY+JUICE+OF+AMERICA/@41.5705654,-90.5664843,17z/data=!4m6!3m5!1s0x87e235a7cf4d89dd:0x64956b682ec0c88c!8m2!3d41.5705655!4d-90.5616134!16s%2Fg%2F1tjkgbnc?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank">
+                <i class="fas fa-map-marker-alt">
+
+                </i> Ubicación
+            </a>
+            <a href=""><i class="fas fa-envelope"></i> pennyjuice@hotmail.com</a>
+        </div>
     </footer>
 
     <script src="popupMenu.js"></script>
