@@ -1,5 +1,8 @@
 // Seleccionar el elemento de entrada de texto
 function leerTexto(texto) {
+  const lectorActivo = localStorage.getItem('lectorActivo') === 'true';
+  if (!lectorActivo) return;
+  
   const speech = new SpeechSynthesisUtterance(texto);
   speech.lang = "es-ES";
   window.speechSynthesis.speak(speech);

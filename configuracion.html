@@ -33,15 +33,15 @@
         </ul>
     </aside>
 
-    <div class="theme-container">
-        <div class="theme-section">
+    <main class="theme-container">
+        <section class="theme-section">
             <h2>Preferencias de apariencia</h2>
             <p>Personaliza la apariencia de Penny Juice. Los cambios se aplican inmediatamente y se guardan automáticamente.</p>
             
-            <div class="sync-option" id="syncOption">
+            <article class="sync-option" id="syncOption">
                 <i class="fas fa-sync-alt"></i>
                 <span>Sincronizar con sistema</span>
-            </div>
+            </article>
             <p id="syncDescription">Penny Juice se adaptará automáticamente a la configuración de tu sistema.</p>
             
             <div class="theme-mode-container">
@@ -103,8 +103,22 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+        
+        <section class="accessibility-section">
+            <h2>Preferencias de accesibilidad</h2>
+            <p>Mejora la accesibilidad de Penny Juice según tus necesidades.</p>
+            
+            <div class="accessibility-options">
+                <div class="accessibility-option" id="sightlessMode">
+                    <i class="fa-solid fa-book"></i>
+                    <button id="screenReaderToggle" class="btn-toggle" aria-pressed="false">
+                        Activar modo lector de pantalla
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer>
         <div class="social">
@@ -130,5 +144,6 @@
 
     <script src="popupMenu.js"></script>
     <script src="theme.js"></script>
+    <script src="configuracion.js"></script>
 </body>
 </html>

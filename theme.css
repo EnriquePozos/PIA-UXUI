@@ -317,18 +317,95 @@ footer a:hover {
     background-color: #22272e;
 }
 
-.orange {
-    background: linear-gradient(180deg, #fff 50%, #fd8c73 50%);
+/* Estilos para la sección de accesibilidad */
+.accessibility-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-radius: 8px;
+    background-color: var(--highlight-bg);
+    border: 1px solid var(--border-color);
 }
 
-.purple {
-    background: linear-gradient(180deg, #fff 50%, #bf5af2 50%);
+.accessibility-section h2 {
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
 }
 
-.green {
-    background: linear-gradient(180deg, #0d1117 50%, #2ea043 50%);
+.accessibility-section p {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
 }
 
-.blue {
-    background: linear-gradient(180deg, #0d1117 50%, #388bfd 50%);
+.accessibility-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.accessibility-option {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    border-radius: 6px;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+}
+
+.accessibility-option i {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    color: var(--accent-color);
+}
+
+/* Estilo para el botón toggle */
+.btn-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem;
+    border: none;
+    background: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.btn-toggle::after {
+    content: '';
+    position: absolute;
+    right: -60px;
+    width: 50px;
+    height: 24px;
+    background-color: var(--border-color);
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-toggle::before {
+    content: '';
+    position: absolute;
+    right: -31px;
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    z-index: 1;
+}
+
+/* Estilo para botón activo */
+.btn-toggle[aria-pressed="true"]::after {
+    background-color: var(--accent-color);
+}
+
+.btn-toggle[aria-pressed="true"]::before {
+    transform: translateX(26px);
+    background-color: #fff;
+}
+
+/* Añadir un poco de espacio para el toggle */
+#screenReaderToggle {
+    padding-right: 70px;
 }
