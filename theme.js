@@ -5,8 +5,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const syncOption = document.getElementById('syncOption');
     const lightTheme = document.getElementById('lightTheme');
     const darkTheme = document.getElementById('darkTheme');
+    const grayscaleTheme = document.getElementById('grayTheme');
+    const colorblindTheme = document.getElementById('daltonTheme');
     const lightSelect = document.getElementById('lightSelect');
     const darkSelect = document.getElementById('darkSelect');
+    const grayscaleSelect = document.getElementById('graySelect');
+    const colorblindSelect = document.getElementById('daltonSelect');
     const syncDescription = document.getElementById('syncDescription');
     
     // Verificar preferencia guardada
@@ -18,11 +22,33 @@ document.addEventListener('DOMContentLoaded', function() {
         if (theme === 'dark') {
             htmlElement.setAttribute('data-theme', 'dark');
             lightSelect.classList.remove('active');
+            grayscaleSelect.classList.remove('active');
+            colorblindSelect.classList.remove('active');
             darkSelect.classList.add('active');
+        } else if (theme === 'light') {
+            htmlElement.setAttribute('data-theme', 'light');
+            grayscaleSelect.classList.remove('active');
+            colorblindSelect.classList.remove('active');
+            darkSelect.classList.remove('active');
+            lightSelect.classList.add('active');
+        } else if(theme === 'grayscale'){
+            htmlElement.setAttribute('data-theme', 'grayscale');
+            lightSelect.classList.remove('active');
+            darkSelect.classList.remove('active');
+            colorblindSelect.classList.remove('active');
+            grayscaleSelect.classList.add('active');
+        } else if(theme === 'colorblind'){
+            htmlElement.setAttribute('data-theme', 'colorblind');
+            lightSelect.classList.remove('active');
+            darkSelect.classList.remove('active');
+            grayscaleSelect.classList.remove('active');
+            colorblindSelect.classList.add('active');
         } else {
             htmlElement.removeAttribute('data-theme');
             lightSelect.classList.add('active');
             darkSelect.classList.remove('active');
+            grayscaleSelect.classList.remove('active');
+            colorblindSelect.classList.remove('active');
         }
     }
     
@@ -76,6 +102,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         localStorage.setItem('theme', 'dark');
         updateThemeUI('dark');
+    });
+
+    grayscaleTheme.addEventListener('click', function() {
+        if (syncOption.classList.contains('active')) {
+            syncOption.classList.remove('active');
+            localStorage.setItem('syncWithSystem', false);
+            syncDescription.textContent = 'Selecciona manualmente tu tema preferido.';
+        }
+        localStorage.setItem('theme', 'grayscale');
+        updateThemeUI('grayscale');
+    });
+
+    colorblindTheme.addEventListener('click', function() {
+        if (syncOption.classList.contains('active')) {
+            syncOption.classList.remove('active');
+            localStorage.setItem('syncWithSystem', false);
+            syncDescription.textContent = 'Selecciona manualmente tu tema preferido.';
+        }
+        localStorage.setItem('theme', 'colorblind');
+        updateThemeUI('colorblind');
     });
     
     // Detectar cambios en la preferencia del sistema

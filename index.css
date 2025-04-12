@@ -30,6 +30,7 @@ header {
     background-color: #eb8f55;
     opacity: 0.9;
     transition: left 0.3s ease;
+    z-index: 9999;
 }
 
 .popup-menu ul {

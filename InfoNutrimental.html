@@ -20,33 +20,45 @@
     <link rel="stylesheet" href="InfoNutrimental.css">
     <!--Modo Claro y Oscuro-->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          // Aplicar tema guardado o preferencia del sistema
-          const savedTheme = localStorage.getItem('theme');
-          const syncWithSystem = localStorage.getItem('syncWithSystem') === 'true';
-          
-          function applyTheme(theme) {
-            if (theme === 'dark') {
-              document.documentElement.setAttribute('data-theme', 'dark');
-            } else {
-              document.documentElement.removeAttribute('data-theme');
-            }
+      document.addEventListener("DOMContentLoaded", function () {
+        // Aplicar tema guardado o preferencia del sistema
+        const savedTheme = localStorage.getItem("theme");
+        const syncWithSystem =
+          localStorage.getItem("syncWithSystem") === "true";
+
+        function applyTheme(theme) {
+          // Primero quitamos cualquier atributo de tema anterior
+          document.documentElement.removeAttribute("data-theme");
+
+          // Aplicamos el nuevo tema según corresponda
+          if (theme === "dark") {
+            document.documentElement.setAttribute("data-theme", "dark");
+          } else if (theme === "grayscale") {
+            document.documentElement.setAttribute("data-theme", "grayscale");
+          } else if (theme === "colorblind") {
+            document.documentElement.setAttribute("data-theme", "colorblind");
           }
-          
-          if (syncWithSystem) {
-            // Detectar preferencia del sistema
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            applyTheme(prefersDark ? 'dark' : 'light');
-            
-            // Escuchar cambios en preferencia del sistema
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-              applyTheme(e.matches ? 'dark' : 'light');
+          // Para el tema claro (light) no necesita atributo data-theme
+        }
+
+        if (syncWithSystem) {
+          // Detectar preferencia del sistema
+          const prefersDark = window.matchMedia(
+            "(prefers-color-scheme: dark)"
+          ).matches;
+          applyTheme(prefersDark ? "dark" : "light");
+
+          // Escuchar cambios en preferencia del sistema
+          window
+            .matchMedia("(prefers-color-scheme: dark)")
+            .addEventListener("change", function (e) {
+              applyTheme(e.matches ? "dark" : "light");
             });
-          } else {
-            // Aplicar tema guardado o tema claro por defecto
-            applyTheme(savedTheme || 'light');
-          }
-        });
+        } else {
+          // Aplicar tema guardado o tema claro por defecto
+          applyTheme(savedTheme || "light");
+        }
+      });
     </script>
 </head>
 

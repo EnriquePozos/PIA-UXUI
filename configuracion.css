@@ -127,3 +127,26 @@ footer a:focus {
 footer i {
     margin-right: 5px;
 }
+
+/* Responsividad */
+@media (max-width: 768px) {
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .menu i {
+        padding: 10px 14px;
+        font-size: 24px;
+    }
+
+    .logo {
+        width: 7rem;
+    }
+
+    footer {
+        flex-direction: row;
+        align-items: center;
+        text-align: start;
+    }
+}

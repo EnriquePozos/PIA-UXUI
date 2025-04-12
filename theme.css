@@ -9,29 +9,73 @@
     --accent-color: #0969da;
     --highlight-bg: #f6f8fa;
     --dropdown-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);
+    --menu-bg: #eb8f55; /* Color original del menú */
+    --menu-hover: #f0a76b; /* Color original hover del menú */
     --popup-menu-bg: #eb8f55; /* Color original del menú */
     --btn-compra-bg: #D74B4B; /* Color original del botón compra */
     --btn-compra-hover: #e67b7b; /* Color original hover del botón compra */
     --footer-bg: #FFC672; /* Color original del footer */
+    --footer-text: #000; /* Color original del texto del footer */
+    --footer-hover: #D74B4B; /* Color original del enlace del footer */
 }
 
 /* Variables para tema oscuro */
 [data-theme="dark"] {
-    /* --bg-color: #0d1117; */
     --bg-color: #333; /* Versión oscura del fondo original */
     --text-color: #c9d1d9;
-    /* --border-color: #30363d; */
     --border-color: #ffff; /* Versión oscura del borde original */
-    /* --header-bg: #d39344; Versión oscura del header original */
     --header-bg: #757574; /* Color original del header */
     --accent-color: #58a6ff;
     --highlight-bg: #21262d;
     --dropdown-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --menu-bg: #b06b3f; /* Versión oscura del menú original */
+    --menu-hover: #c05a5a; /* Versión oscura hover del menú */
     --popup-menu-bg: #b06b3f; /* Versión oscura del menú original */
     --btn-compra-bg: #ac3c3c; /* Versión oscura del botón */
     --btn-compra-hover: #c05a5a; /* Versión oscura hover del botón */
     --footer-bg: #757574; /* Versión oscura del footer original */
+    --footer-text: antiquewhite; /* Versión oscura del texto del footer */
+    --footer-hover: #D74B4B; /* Versión oscura del enlace del footer */
 }
+
+/* Variables para tema en escala de grises */
+[data-theme="grayscale"] {
+    --bg-color: #f0f0f0;
+    --text-color: #333333;
+    --border-color: #b0b0b0;
+    --header-bg: #aaaaaa;
+    --accent-color: #666666;
+    --highlight-bg: #dddddd;
+    --dropdown-shadow: 0 8px 24px rgba(100, 100, 100, 0.3);
+    --menu-bg: #999999;
+    --menu-hover: #777777;
+    --popup-menu-bg: #999999;
+    --btn-compra-bg: #777777;
+    --btn-compra-hover: #555555;
+    --footer-bg: #aaaaaa;
+    --footer-text: #000000;
+    --footer-hover: #444444;
+}
+
+/* Variables para tema adaptado a daltonismo (deuteranomalía, el más común) */
+[data-theme="colorblind"] {
+    --bg-color: #ffffff;
+    --text-color: #24292f;
+    --border-color: #bbc5ce;
+    --header-bg: #6590B3; /* Azul distinguible en lugar del naranja */
+    --accent-color: #0073cf; /* Azul más brillante para mejor contraste */
+    --highlight-bg: #e6f2ff;
+    --dropdown-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);
+    --menu-bg: #4682B4; /* Azul acero en vez de naranja */
+    --menu-hover: #5a9bd4; /* Azul más claro para hover */
+    --popup-menu-bg: #4682B4; /* Azul acero en vez de naranja */
+    --btn-compra-bg: #005fa3; /* Azul oscuro en vez de rojo */
+    --btn-compra-hover: #0078d4; /* Azul más claro para hover */
+    --footer-bg: #6590B3; /* Mismo azul que el header para consistencia */
+    --footer-text: #ffffff; /* Texto blanco para mejor contraste */
+    --footer-hover: #005fa3; /* Azul oscuro en vez de rojo */
+}
+
 
 /* Estilos para que la página se adapte al tema */
 body {
@@ -48,8 +92,25 @@ footer {
     background-color: var(--footer-bg);
 }
 
+footer a {
+    color: var(--footer-text);
+}
+
+footer a:hover {
+    color: var(--footer-hover);
+}
+
+.menu i{
+    background-color: var(--menu-bg);
+}
+
+.menu i:hover {
+    background-color: var(--menu-hover);
+}
+
 .popup-menu {
     background-color: var(--popup-menu-bg);
+    z-index: 9999;
 }
 
 .btn-compra {
@@ -89,7 +150,8 @@ footer {
 }
 
 .theme-toggle {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
 }
 
@@ -115,6 +177,16 @@ footer {
 .dark-preview {
     background-color: #0d1117;
     color: #c9d1d9;
+}
+
+.gray-preview {
+    background-color: #f0f0f0;
+    color: #c9d1d9;
+}
+
+.dalton-preview {
+    background-color: #ffffff;    /* Un azul más visible para deuteranómalos */
+    color: #FFFFFF;               /* Texto blanco para mejor contraste */
 }
 
 .preview-content {
@@ -171,6 +243,16 @@ footer {
 .dark-label {
     background-color: #21262d;
     color: #c9d1d9;
+}
+
+.gray-label {
+    background-color: #484f58;
+    color: #c9d1d9;
+}
+
+.dalton-label {
+    background-color: #26415c;
+    color: #b3b6ba;
 }
 
 .theme-select {
