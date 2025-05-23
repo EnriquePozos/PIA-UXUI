@@ -1,5 +1,69 @@
 // Código para gestionar el sistema de temas al estilo GitHub
 document.addEventListener('DOMContentLoaded', function() {
+
+    //Lector en pantalla
+    function leerTexto(texto) {
+        const lectorActivo = localStorage.getItem('lectorActivo') === 'true';
+        if (!lectorActivo) return;
+    
+        const speech = new SpeechSynthesisUtterance(texto);
+        speech.lang = "es-ES";
+        window.speechSynthesis.speak(speech); 
+    }
+
+    function desactivado(texto) {
+        const speech = new SpeechSynthesisUtterance(texto);
+        speech.lang = "es-ES";
+        window.speechSynthesis.speak(speech); // Por si hay algo hablando
+    }
+
+    const screenReaderToggle = document.getElementById('screenReaderToggle');
+
+    // Leer estado guardado
+    const lectorGuardado = localStorage.getItem('lectorActivo') === 'true';
+    screenReaderToggle.setAttribute('aria-pressed', lectorGuardado);
+    screenReaderToggle.textContent = lectorGuardado ? 'Desactivar modo lector de pantalla' : 'Activar modo lector de pantalla';
+
+    screenReaderToggle.addEventListener('click', function () {
+        const isActive = this.getAttribute('aria-pressed') === 'true';
+        const nuevoEstado = !isActive;
+
+        // Guardar en localStorage
+        localStorage.setItem('lectorActivo', nuevoEstado);
+
+        // Cambiar estado visual
+        this.setAttribute('aria-pressed', nuevoEstado);
+        this.textContent = nuevoEstado ? 'Desactivar modo lector de pantalla' : 'Activar modo lector de pantalla';
+
+        if (nuevoEstado) {
+            leerTexto("Modo lector de pantalla activado");
+        } else {
+            desactivado("Modo lector de pantalla desactivado");
+            //window.speechSynthesis.cancel(); // Por si hay algo hablando
+        }
+    });
+
+    const openBtn = document.getElementById('openSettingsBtn');
+    const modal = document.getElementById('settingsModal');
+    const closeBtn = document.getElementById('closeSettingsBtn');
+
+    openBtn.addEventListener('click', () => {
+        modal.classList.remove('hidden');
+        setTimeout(() => modal.classList.add('show'), 10);
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('show');
+        setTimeout(() => modal.classList.add('hidden'), 400); // Espera a que termine la transición
+    });
+
+    // Opcional: cerrar con Esc
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('show')) {
+            modal.classList.remove('show');
+            setTimeout(() => modal.classList.add('hidden'), 400);
+        }
+    });
     // Sistema de temas
     const htmlElement = document.documentElement;
     const syncOption = document.getElementById('syncOption');

@@ -18,6 +18,9 @@
     --footer-bg: #FFC672; /* Color original del footer */
     --footer-text: #000; /* Color original del texto del footer */
     --footer-hover: #D74B4B; /* Color original del enlace del footer */
+    --settings-btn-bg: #ffffff; /* Color del botón de configuración */
+    --settings-btn-hover: #f0f0f0; /* Color hover del botón de configuración */
+    --settings-btn-text: #333333; /* Color del icono de configuración */
 }
 
 /* Variables para tema oscuro */
@@ -38,6 +41,9 @@
     --footer-bg: #757574; /* Versión oscura del footer original */
     --footer-text: antiquewhite; /* Versión oscura del texto del footer */
     --footer-hover: #D74B4B; /* Versión oscura del enlace del footer */
+    --settings-btn-bg: #484848; /* Color del botón de configuración oscuro */
+    --settings-btn-hover: #5a5a5a; /* Color hover del botón de configuración oscuro */
+    --settings-btn-text: #e0e0e0; /* Color del icono de configuración oscuro */
 }
 
 /* Variables para tema en escala de grises */
@@ -58,6 +64,9 @@
     --footer-bg: #aaaaaa;
     --footer-text: #000000;
     --footer-hover: #444444;
+    --settings-btn-bg: #cccccc; /* Color del botón de configuración gris */
+    --settings-btn-hover: #b8b8b8; /* Color hover del botón de configuración gris */
+    --settings-btn-text: #333333; /* Color del icono de configuración gris */
 }
 
 /* Variables para tema adaptado a daltonismo (deuteranomalía, el más común) */
@@ -78,8 +87,10 @@
     --footer-bg: #6590B3; /* Mismo azul que el header para consistencia */
     --footer-text: #ffffff; /* Texto blanco para mejor contraste */
     --footer-hover: #005fa3; /* Azul oscuro en vez de rojo */
+    --settings-btn-bg: #ffffff; /* Color del botón de configuración daltonismo */
+    --settings-btn-hover: #e6f2ff; /* Color hover del botón de configuración daltonismo */
+    --settings-btn-text: #0073cf; /* Color del icono de configuración daltonismo */
 }
-
 
 /* Estilos para que la página se adapte al tema */
 body {
@@ -128,6 +139,53 @@ footer a:hover {
 .btn-compra:hover,
 .btn-compra:focus {
     background-color: var(--btn-compra-hover);
+}
+
+/* Estilos para el botón de configuración (engrane) */
+.settings-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    background-color: var(--settings-btn-bg);
+    color: var(--settings-btn-text);
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    font-size: 20px;
+    z-index: 1000;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.settings-button:hover {
+    background-color: var(--settings-btn-hover);
+    transform: translateY(-2px) rotate(90deg);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.settings-button:active {
+    transform: translateY(0) rotate(180deg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.settings-button i {
+    transition: transform 0.3s ease;
+}
+
+/* Responsive para el botón de configuración */
+@media (max-width: 768px) {
+    .settings-button {
+        width: 48px;
+        height: 48px;
+        font-size: 18px;
+        bottom: 15px;
+        right: 15px;
+    }
 }
 
 /* Estilos para la sección de configuración de temas */
@@ -325,25 +383,305 @@ footer a:hover {
     background-color: #22272e;
 }
 
-/* Estilos para la sección de accesibilidad */
-.accessibility-section {
-    margin: 2rem 0;
-    padding: 1.5rem;
-    border-radius: 8px;
+.settings-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 999999;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.settings-modal.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.settings-content {
+    background: var(--bg-color);
+    width: 100%;
+    max-width: 650px;
+    max-height: calc(100vh - 40px);
+    padding: 32px;
+    border-radius: 16px;
+    position: relative;
+    overflow-y: auto;
+    animation: slideUp 0.4s ease;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Scroll personalizado */
+.settings-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.settings-content::-webkit-scrollbar-track {
+    background: var(--highlight-bg);
+    border-radius: 4px;
+}
+
+.settings-content::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.settings-content::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+}
+
+/* Firefox scrollbar */
+.settings-content {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) var(--highlight-bg);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.close-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent;
+    font-size: 24px;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.close-button:hover {
+    background-color: var(--highlight-bg);
+}
+
+/* Sección de temas compacta */
+.theme-section {
+    margin-bottom: 24px;
+}
+
+.theme-section h2 {
+    color: var(--text-color);
+    margin: 0 0 8px 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.theme-section p {
+    color: #666;
+    margin: 0 0 20px 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Opción de sincronizar más compacta */
+.sync-option {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
     background-color: var(--highlight-bg);
     border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.sync-option:hover {
+    background-color: #e9ecef;
+}
+
+.sync-option i {
+    color: var(--accent-color);
+    margin-right: 12px;
+    font-size: 1.1rem;
+}
+
+.sync-option span {
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+#syncDescription {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 0 0 16px 0;
+}
+
+/* Temas en grid compacto */
+.theme-toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.theme-option {
+    position: relative;
+    cursor: pointer;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px;
+    transition: all 0.2s ease;
+    background: var(--bg-color);
+}
+
+.theme-option:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+}
+
+.theme-option.selected {
+    border-color: var(--accent-color);
+    background-color: var(--highlight-bg);
+}
+
+.theme-select {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    background: var(--bg-color);
+    transition: all 0.2s ease;
+}
+
+.theme-option.selected .theme-select {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.theme-option.selected .theme-select::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+.theme-preview {
+    height: 40px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.light-preview {
+    background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+    border: 1px solid #e9ecef;
+}
+
+.dark-preview {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+}
+
+.gray-preview {
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+}
+
+.dalton-preview {
+    background: linear-gradient(135deg, #4a90e2 0%, #7bb3f0 100%);
+}
+
+.preview-content {
+    padding: 6px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.preview-header {
+    height: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    width: 60%;
+}
+
+.preview-text {
+    height: 4px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 1px;
+    width: 80%;
+}
+
+.preview-progress {
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 2px;
+    width: 40%;
+}
+
+.dark-preview .preview-header,
+.dark-preview .preview-text {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.theme-label {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.theme-label i {
+    margin-right: 6px;
+    font-size: 0.9rem;
+    color: var(--accent-color);
+}
+
+/* Sección de accesibilidad mejorada */
+.accessibility-section {
+    padding: 20px 0 0 0;
+    border-top: 1px solid var(--border-color);
 }
 
 .accessibility-section h2 {
     color: var(--text-color);
-    margin-bottom: 0.5rem;
-    font-size: 1.5rem;
+    margin: 0 0 8px 0;
+    font-size: 1.4rem;
+    font-weight: 600;
 }
 
 .accessibility-section p {
-    color: var(--text-color);
-    margin-bottom: 1.5rem;
-    font-size: 0.95rem;
+    color: #666;
+    margin: 0 0 16px 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
 }
 
 .accessibility-options {
@@ -355,65 +693,227 @@ footer a:hover {
 .accessibility-option {
     display: flex;
     align-items: center;
-    padding: 0.75rem;
-    border-radius: 6px;
-    background-color: var(--bg-color);
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-radius: 8px;
+    background-color: var(--highlight-bg);
     border: 1px solid var(--border-color);
+    min-height: 60px;
+}
+
+.accessibility-option-content {
+    display: flex;
+    align-items: center;
+    flex: 1;
 }
 
 .accessibility-option i {
     font-size: 1.2rem;
-    margin-right: 1rem;
+    margin-right: 16px;
     color: var(--accent-color);
+    min-width: 20px;
 }
 
-/* Estilo para el botón toggle */
-.btn-toggle {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    padding: 0.5rem;
-    border: none;
-    background: transparent;
+.accessibility-option-text {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.accessibility-option-title {
+    font-weight: 500;
     color: var(--text-color);
-    cursor: pointer;
-    font-size: 0.95rem;
+    font-size: 1rem;
+    margin-bottom: 2px;
 }
 
-.btn-toggle::after {
-    content: '';
-    position: absolute;
-    right: -60px;
+.accessibility-option-description {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.3;
+}
+
+/* Toggle switch mejorado */
+.toggle-switch {
+    position: relative;
     width: 50px;
-    height: 24px;
+    height: 28px;
     background-color: var(--border-color);
-    border-radius: 12px;
+    border-radius: 14px;
+    cursor: pointer;
     transition: background-color 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 16px;
 }
 
-.btn-toggle::before {
+.toggle-switch::before {
     content: '';
     position: absolute;
-    right: -31px;
-    width: 18px;
-    height: 18px;
-    background-color: #fff;
+    top: 2px;
+    left: 2px;
+    width: 24px;
+    height: 24px;
+    background-color: white;
     border-radius: 50%;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-    z-index: 1;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilo para botón activo */
-.btn-toggle[aria-pressed="true"]::after {
+.toggle-switch.active {
     background-color: var(--accent-color);
 }
 
-.btn-toggle[aria-pressed="true"]::before {
-    transform: translateX(26px);
-    background-color: #fff;
+.toggle-switch.active::before {
+    transform: translateX(22px);
 }
 
-/* Añadir un poco de espacio para el toggle */
-#screenReaderToggle {
-    padding-right: 70px;
+/* Eliminar estilos antiguos del btn-toggle */
+.btn-toggle {
+    display: none;
+}
+
+/* Eliminar estilos antiguos que causan conflictos */
+/* .btn-toggle - estilos removidos completamente */
+
+/* .toggle-switch - estilos actualizados arriba */
+
+/* Responsive mejorado */
+@media (max-width: 768px) {
+    .settings-content {
+        max-width: 400px;
+        padding: 24px 20px;
+        margin: 15px;
+        max-height: calc(100vh - 30px);
+    }
+
+    .theme-section h2,
+    .accessibility-section h2 {
+        font-size: 1.3rem;
+    }
+
+    .theme-toggle {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .theme-option {
+        padding: 12px;
+    }
+
+    .theme-preview {
+        height: 35px;
+    }
+
+    .accessibility-option {
+        padding: 16px;
+        min-height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .accessibility-option-content {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    .accessibility-option i {
+        margin-right: 12px;
+    }
+
+    .toggle-switch {
+        align-self: flex-end;
+        margin-left: 0;
+        width: 46px;
+        height: 26px;
+    }
+
+    .toggle-switch::before {
+        width: 22px;
+        height: 22px;
+    }
+
+    .toggle-switch.active::before {
+        transform: translateX(20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .settings-content {
+        max-width: 350px;
+        padding: 20px 16px;
+        margin: 10px;
+        max-height: calc(100vh - 20px);
+    }
+
+    .theme-section h2,
+    .accessibility-section h2 {
+        font-size: 1.2rem;
+    }
+
+    .theme-option {
+        padding: 10px;
+    }
+
+    .theme-preview {
+        height: 32px;
+    }
+
+    .accessibility-option {
+        padding: 14px;
+    }
+
+    .accessibility-option-title {
+        font-size: 0.95rem;
+    }
+
+    .accessibility-option-description {
+        font-size: 0.8rem;
+    }
+
+    .toggle-switch {
+        width: 44px;
+        height: 24px;
+    }
+
+    .toggle-switch::before {
+        width: 20px;
+        height: 20px;
+    }
+
+    .toggle-switch.active::before {
+        transform: translateX(20px);
+    }
+}
+
+@media (max-width: 360px) {
+    .settings-content {
+        max-width: 320px;
+        padding: 16px 12px;
+    }
+
+    .theme-toggle {
+        gap: 8px;
+    }
+
+    .theme-option {
+        padding: 8px;
+    }
+
+    .theme-preview {
+        height: 30px;
+    }
+
+    .theme-label {
+        font-size: 0.8rem;
+    }
+
+    .accessibility-option {
+        padding: 12px;
+    }
+
+    .accessibility-option i {
+        font-size: 1.1rem;
+        margin-right: 10px;
+    }
 }
