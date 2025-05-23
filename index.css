@@ -28,7 +28,6 @@ header {
     width: 250px;
     height: 100%;
     background-color: #eb8f55;
-    opacity: 0.9;
     transition: left 0.3s ease;
     z-index: 9999;
 }
@@ -49,8 +48,8 @@ header {
     display: block;
 }
 
-.popup-menu a:hover {
-    color: #D74B4B;
+.popup-menu li:hover {
+    background-color: #D74B4B;
     text-decoration: none;
     display: block;
 }
@@ -63,7 +62,7 @@ header {
 
 /* Ícono Menú */
 .menu i {
-    background-color: #eb8f55;
+    /* background-color: #eb8f55; */
     padding: 12px 16px;
     border: 2px solid black;
     border-radius: 5px;

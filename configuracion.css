@@ -49,7 +49,7 @@ header {
 }
 
 .popup-menu a:hover {
-    color: #D74B4B;
+    /* color: #D74B4B; */
     text-decoration: none;
     display: block;
 }

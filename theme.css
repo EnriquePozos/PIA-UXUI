@@ -9,9 +9,10 @@
     --accent-color: #0969da;
     --highlight-bg: #f6f8fa;
     --dropdown-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);
-    --menu-bg: #eb8f55; /* Color original del menú */
+    --menu-bg: #FFC672; /* Color original del menú */
     --menu-hover: #f0a76b; /* Color original hover del menú */
-    --popup-menu-bg: #eb8f55; /* Color original del menú */
+    --popup-menu-bg: #FFC672; /* Color original del menú */
+    --popup-menu-hv: #f0b564; /* Color original hover del menú */
     --btn-compra-bg: #D74B4B; /* Color original del botón compra */
     --btn-compra-hover: #e67b7b; /* Color original hover del botón compra */
     --footer-bg: #FFC672; /* Color original del footer */
@@ -28,9 +29,10 @@
     --accent-color: #58a6ff;
     --highlight-bg: #21262d;
     --dropdown-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    --menu-bg: #b06b3f; /* Versión oscura del menú original */
+    --menu-bg: #757574; /* Versión oscura del menú original */
     --menu-hover: #c05a5a; /* Versión oscura hover del menú */
-    --popup-menu-bg: #b06b3f; /* Versión oscura del menú original */
+    --popup-menu-bg: #757574; /* Versión oscura del menú original */
+    --popup-menu-hv: #868684; /* Color original hover del menú */
     --btn-compra-bg: #ac3c3c; /* Versión oscura del botón */
     --btn-compra-hover: #c05a5a; /* Versión oscura hover del botón */
     --footer-bg: #757574; /* Versión oscura del footer original */
@@ -47,9 +49,10 @@
     --accent-color: #666666;
     --highlight-bg: #dddddd;
     --dropdown-shadow: 0 8px 24px rgba(100, 100, 100, 0.3);
-    --menu-bg: #999999;
+    --menu-bg: #aaaaaa;
     --menu-hover: #777777;
-    --popup-menu-bg: #999999;
+    --popup-menu-bg: #aaaaaa;
+    --popup-menu-hv: #8e8e8e; /* Color original hover del menú */
     --btn-compra-bg: #777777;
     --btn-compra-hover: #555555;
     --footer-bg: #aaaaaa;
@@ -66,9 +69,10 @@
     --accent-color: #0073cf; /* Azul más brillante para mejor contraste */
     --highlight-bg: #e6f2ff;
     --dropdown-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);
-    --menu-bg: #4682B4; /* Azul acero en vez de naranja */
+    --menu-bg: #6590B3; /* Azul acero en vez de naranja */
     --menu-hover: #5a9bd4; /* Azul más claro para hover */
-    --popup-menu-bg: #4682B4; /* Azul acero en vez de naranja */
+    --popup-menu-bg: #6590B3; /* Azul acero en vez de naranja */
+    --popup-menu-hv: #427197; /* Color original hover del menú */
     --btn-compra-bg: #005fa3; /* Azul oscuro en vez de rojo */
     --btn-compra-hover: #0078d4; /* Azul más claro para hover */
     --footer-bg: #6590B3; /* Mismo azul que el header para consistencia */
@@ -111,6 +115,10 @@ footer a:hover {
 .popup-menu {
     background-color: var(--popup-menu-bg);
     z-index: 9999;
+}
+
+.popup-menu li:hover {
+    background-color: var(--popup-menu-hv);
 }
 
 .btn-compra {
