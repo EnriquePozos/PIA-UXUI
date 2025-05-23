@@ -93,7 +93,7 @@ header {
 }
 
 .menu-icon span {
-    background: #333;
+    background: white;
     height: 3px;
     width: 100%;
     border-radius: 2px;
@@ -435,10 +435,10 @@ main {
 .productos {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 2rem;
-    padding: 0;
-    margin: 0;
+    padding: 1rem 0;
+    margin: auto;
 }
 
 /* Card de producto */

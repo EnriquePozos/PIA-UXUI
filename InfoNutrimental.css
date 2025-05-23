@@ -1,75 +1,229 @@
+/* InfoNutrimental.css */
+
+/* Estilos generales de la página (si son necesarios y no están en index.css) */
+body {
+    font-family: var(--font-family-sans-serif, sans-serif); /* Variable from your theme.css */
+    background-color: var(--bg-color); /* Variable from your theme.css */
+    color: var(--text-color); /* Variable from your theme.css */
+    margin: 0;
+    padding: 0;
+}
+
+/* Título de la página (si se necesita estilo adicional al de index.css) */
+.page-title {
+    /* Using --text-color for general page titles for better readability.
+       If you want it to be the primary accent color like headers, use var(--primary-color)
+       but ensure contrast is good. */
+    color: var(--text-color); /* Variable from your theme.css */
+    font-weight: bold;
+}
+
+.lead {
+    color: var(--text-color-secondary, #555555); /* Variable from your theme.css (adapted from --secondary-text-color) */
+}
+
 .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    max-width: 640px; /* 150px * 4 + espacio */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 2rem;
+    padding: 1rem 0;
     margin: auto;
-    gap: 1rem;
-    padding: 1rem;
-    justify-content: center;
-  }
-  
-  .flip-card {
-    width: 150px;
-    height: 220px;
+}
+
+.flip-card {
+    width: 100%;
+    aspect-ratio: 2 / 3;
     perspective: 1000px;
     cursor: pointer;
-  }
-  
-  .flip-card-inner {
+    transition: transform 0.2s ease-in-out;
+}
+
+.flip-card:hover {
+    transform: translateY(-5px);
+}
+
+.flip-card-inner {
     width: 100%;
     height: 100%;
     position: relative;
-    transition: transform 0.8s;
+    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
     transform-style: preserve-3d;
-  }
-  
-  .flip-card.flipped .flip-card-inner {
+    border-radius: var(--card-border-radius, 10px); /* Variable from your theme.css */
+    box-shadow: var(--card-shadow, 0 4px 8px rgba(0, 0, 0, 0.1)); /* Variable from your theme.css */
+}
+
+.flip-card.flipped .flip-card-inner {
     transform: rotateY(180deg);
-  }
-  
-  .flip-card-front,
-  .flip-card-back {
+}
+
+.flip-card-front,
+.flip-card-back {
     width: 100%;
     height: 100%;
     position: absolute;
-    border-radius: 12px;
+    border-radius: inherit;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     backface-visibility: hidden;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-  }
-  
-  .flip-card-front {
-    background-color: #fff;
-    z-index: 2;
-  }
-  
-  .flip-card-back {
-    background-color: #f0f0f0;
-    transform: rotateY(180deg);
-  }
-  
-  .flip-card img {
+    background-color: var(--card-bg, #FFFFFF); /* Variable from your theme.css */
+}
+
+.flip-card-front img,
+.flip-card-back img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-  }
-  
-  .etiqueta {
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    border-radius: inherit;
+}
+
+.card-title-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    text-align: center;
-    background-color: #bff1f1;
-    color: #000;
-    padding: 5px 0;
-    font-size: 0.85rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff; /* Kept white for overlay on images, usually high contrast */
+    padding: 10px 15px;
+    font-size: 1.1em;
     font-weight: bold;
-    border-top: 1px solid #ccc;
-  }
-  .flip-card img {
+    text-align: center;
+    z-index: 2;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+}
+
+.etiqueta {
+    background-color: var(--btn-compra-bg, #D74B4B); /* Using button background from your theme.css */
+    color: var(--button-text, #FFFFFF); /* Using button text color from your theme.css */
+    padding: 8px 0;
+    text-align: center;
+    font-size: 0.95em;
+    font-weight: 500;
+    width: 100%;
+    z-index: 2;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+    transition: background-color 0.3s ease;
+}
+
+.flip-card:hover .etiqueta {
+    background-color: var(--btn-compra-hover, #C73A3A); /* Using button hover background from your theme.css */
+}
+
+.flip-card-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    /* Using --highlight-bg as it's often a subtle light gray, good for card backs.
+       Falls back to #f6f8fa if --highlight-bg is not found in a specific theme context,
+       though it is in your :root.
+       Alternatively, you could use var(--card-bg) if you want it the same as the front. */
+    background-color: var(--highlight-bg, #f6f8fa);
+}
+
+.flip-card-back img {
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+/* Dentro de tu InfoNutrimental.css que ya tienes y me mostraste: */
+
+.flip-card { /* Tu diseño existente */
+    width: 100%; /* Para que tome el ancho del grid-template-columns */
+    aspect-ratio: 2 / 3;
+    perspective: 1000px; /* ESENCIAL para el efecto 3D */
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out; /* Para el efecto hover */
+}
+
+.flip-card-inner { /* Tu diseño existente */
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    border-radius: 12px;
-  }
+    position: relative;
+    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); /* Animación del volteo */
+    transform-style: preserve-3d; /* ESENCIAL para que los hijos estén en espacio 3D */
+    /* ... (tu border-radius, box-shadow con variables CSS) ... */
+}
+
+.flip-card.flipped .flip-card-inner { /* Tu diseño existente */
+    transform: rotateY(180deg); /* La rotación que ocurre al hacer clic */
+}
+
+.flip-card-front,
+.flip-card-back { /* Tu diseño existente */
+    width: 100%;
+    height: 100%;
+    position: absolute; /* ESENCIAL para que se superpongan */
+    top: 0; /* Para alineación correcta */
+    left: 0; /* Para alineación correcta */
+    border-radius: inherit;
+    overflow: hidden;
+    backface-visibility: hidden; /* ESENCIAL para ocultar la cara de atrás del elemento */
+    -webkit-backface-visibility: hidden; /* Para compatibilidad */
+    /* ... (tu display:flex, justify-content, background-color con var(--card-bg)) ... */
+}
+
+.flip-card-back { /* Tu diseño existente, con una adición importante */
+    transform: rotateY(180deg); /* ESENCIAL para que el reverso empiece "girado" y oculto */
+    /* ... (tus display:flex, align-items, padding, background-color con var(--highlight-bg)) ... */
+}
+
+/* Los estilos para .flip-card-front img, .flip-card-back img,
+   .card-title-overlay, y .etiqueta que tienes en ese archivo
+   son para el contenido VISUAL y están correctos para el diseño. */
+
+.flip-card-front img,
+.flip-card-back img { /* Tu diseño existente */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Para el anverso */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Para que los overlays puedan estar encima si es necesario */
+    border-radius: inherit; /* Para que la imagen respete el radio del contenedor */
+}
+
+/* Ajuste específico para la imagen del reverso si es información */
+.flip-card-back img { /* Tu diseño existente */
+    position: relative; /* Para que el padding de .flip-card-back funcione */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Importante para que se vea toda la info nutrimental */
+    border-radius: 8px; /* Radio propio si lo deseas */
+    /* z-index no es necesario aquí si es el único contenido del reverso */
+}
+
+
+/* Responsive adjustments if needed beyond Bootstrap's container */
+@media (max-width: 768px) {
+    .card-container {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 1.5rem;
+    }
+    .card-title-overlay {
+        font-size: 1em;
+        padding: 8px 10px;
+    }
+    .etiqueta {
+        font-size: 0.9em;
+        padding: 6px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-container {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+}
