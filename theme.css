@@ -1,108 +1,166 @@
-/* Variables de tema y estilos para el selector de temas al estilo GitHub */
+/* ===================================
+   Variables de tema y sistema de diseño
+   =================================== */
 
 :root {
-    /* Variables para tema claro */
+    /* Colores base del tema claro (mantenidos) */
     --bg-color: #ffffff;
     --text-color: #24292f;
     --border-color: #d0d7de;
-    --header-bg: #FFC672; /*Mantenemos el color original del header  */
+    --header-bg: #FFC672;
     --accent-color: #0969da;
     --highlight-bg: #f6f8fa;
     --dropdown-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);
-    --menu-bg: #FFC672; /* Color original del menú */
-    --menu-hover: #f0a76b; /* Color original hover del menú */
-    --popup-menu-bg: #FFC672; /* Color original del menú */
-    --popup-menu-hv: #f0b564; /* Color original hover del menú */
-    --btn-compra-bg: #D74B4B; /* Color original del botón compra */
-    --btn-compra-hover: #e67b7b; /* Color original hover del botón compra */
-    --footer-bg: #FFC672; /* Color original del footer */
-    --footer-text: #000; /* Color original del texto del footer */
-    --footer-hover: #D74B4B; /* Color original del enlace del footer */
-    --settings-btn-bg: #ffffff; /* Color del botón de configuración */
-    --settings-btn-hover: #f0f0f0; /* Color hover del botón de configuración */
-    --settings-btn-text: #333333; /* Color del icono de configuración */
+    --menu-bg: #FFC672;
+    --menu-hover: #f0a76b;
+    --popup-menu-bg: #FFC672;
+    --popup-menu-hv: #f0b564;
+    --btn-compra-bg: #D74B4B;
+    --btn-compra-hover: #e67b7b;
+    --footer-bg: #FFC672;
+    --footer-text: #000;
+    --footer-hover: #D74B4B;
+    --settings-btn-bg: #ffffff;
+    --settings-btn-hover: #f0f0f0;
+    --settings-btn-text: #333333;
+    
+    /* Variables adicionales para mejor consistencia */
+    --primary-color: #FFC672;
+    --secondary-color: #D74B4B;
+    --success-color: #2da44e;
+    --warning-color: #fb8500;
+    --error-color: #cf222e;
+    --info-color: #0969da;
+    
+    /* Espaciado y dimensiones */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 3rem;
+    
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-full: 50px;
+    
+    /* Transiciones */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.4s ease;
+    
+    /* Sombras */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+    --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.25);
 }
 
-/* Variables para tema oscuro */
+/* ===================================
+   Tema oscuro mejorado
+   =================================== */
 [data-theme="dark"] {
-    --bg-color: #333; /* Versión oscura del fondo original */
-    --text-color: #c9d1d9;
-    --border-color: #ffff; /* Versión oscura del borde original */
-    --header-bg: #757574; /* Color original del header */
+    --bg-color: #1a1a1a;
+    --text-color: #e4e6eb;
+    --border-color: #3a3b3c;
+    --header-bg: #2d2d2d;
     --accent-color: #58a6ff;
-    --highlight-bg: #21262d;
-    --dropdown-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    --menu-bg: #757574; /* Versión oscura del menú original */
-    --menu-hover: #c05a5a; /* Versión oscura hover del menú */
-    --popup-menu-bg: #757574; /* Versión oscura del menú original */
-    --popup-menu-hv: #868684; /* Color original hover del menú */
-    --btn-compra-bg: #ac3c3c; /* Versión oscura del botón */
-    --btn-compra-hover: #c05a5a; /* Versión oscura hover del botón */
-    --footer-bg: #757574; /* Versión oscura del footer original */
-    --footer-text: antiquewhite; /* Versión oscura del texto del footer */
-    --footer-hover: #D74B4B; /* Versión oscura del enlace del footer */
-    --settings-btn-bg: #484848; /* Color del botón de configuración oscuro */
-    --settings-btn-hover: #5a5a5a; /* Color hover del botón de configuración oscuro */
-    --settings-btn-text: #e0e0e0; /* Color del icono de configuración oscuro */
+    --highlight-bg: #242526;
+    --dropdown-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    --menu-bg: #2d2d2d;
+    --menu-hover: #3a3b3c;
+    --popup-menu-bg: #242526;
+    --popup-menu-hv: #3a3b3c;
+    --btn-compra-bg: #ac3c3c;
+    --btn-compra-hover: #c05a5a;
+    --footer-bg: #2d2d2d;
+    --footer-text: #e4e6eb;
+    --footer-hover: #ff6b6b;
+    --settings-btn-bg: #3a3b3c;
+    --settings-btn-hover: #4a4b4c;
+    --settings-btn-text: #e4e6eb;
+    
+    /* Ajustes adicionales para tema oscuro */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
-/* Variables para tema en escala de grises */
+/* ===================================
+   Tema escala de grises mejorado
+   =================================== */
 [data-theme="grayscale"] {
-    --bg-color: #f0f0f0;
-    --text-color: #333333;
-    --border-color: #b0b0b0;
-    --header-bg: #aaaaaa;
-    --accent-color: #666666;
-    --highlight-bg: #dddddd;
-    --dropdown-shadow: 0 8px 24px rgba(100, 100, 100, 0.3);
-    --menu-bg: #aaaaaa;
-    --menu-hover: #777777;
-    --popup-menu-bg: #aaaaaa;
-    --popup-menu-hv: #8e8e8e; /* Color original hover del menú */
-    --btn-compra-bg: #777777;
-    --btn-compra-hover: #555555;
-    --footer-bg: #aaaaaa;
-    --footer-text: #000000;
-    --footer-hover: #444444;
-    --settings-btn-bg: #cccccc; /* Color del botón de configuración gris */
-    --settings-btn-hover: #b8b8b8; /* Color hover del botón de configuración gris */
-    --settings-btn-text: #333333; /* Color del icono de configuración gris */
+    --bg-color: #f5f5f5;
+    --text-color: #2d2d2d;
+    --border-color: #c0c0c0;
+    --header-bg: #a8a8a8;
+    --accent-color: #5a5a5a;
+    --highlight-bg: #e8e8e8;
+    --dropdown-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    --menu-bg: #a8a8a8;
+    --menu-hover: #909090;
+    --popup-menu-bg: #a8a8a8;
+    --popup-menu-hv: #909090;
+    --btn-compra-bg: #6a6a6a;
+    --btn-compra-hover: #4a4a4a;
+    --footer-bg: #a8a8a8;
+    --footer-text: #1a1a1a;
+    --footer-hover: #3a3a3a;
+    --settings-btn-bg: #d0d0d0;
+    --settings-btn-hover: #b8b8b8;
+    --settings-btn-text: #2d2d2d;
 }
 
-/* Variables para tema adaptado a daltonismo (deuteranomalía, el más común) */
+/* ===================================
+   Tema daltonismo mejorado
+   =================================== */
 [data-theme="colorblind"] {
     --bg-color: #ffffff;
-    --text-color: #24292f;
-    --border-color: #bbc5ce;
-    --header-bg: #6590B3; /* Azul distinguible en lugar del naranja */
-    --accent-color: #0073cf; /* Azul más brillante para mejor contraste */
-    --highlight-bg: #e6f2ff;
-    --dropdown-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);
-    --menu-bg: #6590B3; /* Azul acero en vez de naranja */
-    --menu-hover: #5a9bd4; /* Azul más claro para hover */
-    --popup-menu-bg: #6590B3; /* Azul acero en vez de naranja */
-    --popup-menu-hv: #427197; /* Color original hover del menú */
-    --btn-compra-bg: #005fa3; /* Azul oscuro en vez de rojo */
-    --btn-compra-hover: #0078d4; /* Azul más claro para hover */
-    --footer-bg: #6590B3; /* Mismo azul que el header para consistencia */
-    --footer-text: #ffffff; /* Texto blanco para mejor contraste */
-    --footer-hover: #005fa3; /* Azul oscuro en vez de rojo */
-    --settings-btn-bg: #ffffff; /* Color del botón de configuración daltonismo */
-    --settings-btn-hover: #e6f2ff; /* Color hover del botón de configuración daltonismo */
-    --settings-btn-text: #0073cf; /* Color del icono de configuración daltonismo */
+    --text-color: #1a1f36;
+    --border-color: #b8c5d6;
+    --header-bg: #4a7c7e;
+    --accent-color: #1e5c8a;
+    --highlight-bg: #e8f4f8;
+    --dropdown-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    --menu-bg: #4a7c7e;
+    --menu-hover: #5a8e90;
+    --popup-menu-bg: #4a7c7e;
+    --popup-menu-hv: #3a6a6c;
+    --btn-compra-bg: #1e5c8a;
+    --btn-compra-hover: #2870a8;
+    --footer-bg: #4a7c7e;
+    --footer-text: #ffffff;
+    --footer-hover: #a8d5e2;
+    --settings-btn-bg: #ffffff;
+    --settings-btn-hover: #e8f4f8;
+    --settings-btn-text: #1e5c8a;
 }
 
-/* Estilos para que la página se adapte al tema */
+/* ===================================
+   Aplicación de temas a elementos
+   =================================== */
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color var(--transition-normal), 
+                color var(--transition-normal);
 }
 
+/* Transiciones suaves para cambios de tema */
+* {
+    transition: background-color var(--transition-fast),
+                color var(--transition-fast),
+                border-color var(--transition-fast);
+}
+
+/* Header */
 header {
     background-color: var(--header-bg);
 }
 
+/* Footer */
 footer {
     background-color: var(--footer-bg);
 }
@@ -115,23 +173,24 @@ footer a:hover {
     color: var(--footer-hover);
 }
 
-.menu i{
+/* Menú */
+.menu-button {
     background-color: var(--menu-bg);
 }
 
-.menu i:hover {
+.menu-button:hover {
     background-color: var(--menu-hover);
 }
 
 .popup-menu {
     background-color: var(--popup-menu-bg);
-    z-index: 9999;
 }
 
 .popup-menu li:hover {
     background-color: var(--popup-menu-hv);
 }
 
+/* Botones */
 .btn-compra {
     background-color: var(--btn-compra-bg);
 }
@@ -141,7 +200,9 @@ footer a:hover {
     background-color: var(--btn-compra-hover);
 }
 
-/* Estilos para el botón de configuración (engrane) */
+/* ===================================
+   Botón de configuración flotante mejorado
+   =================================== */
 .settings-button {
     position: fixed;
     bottom: 20px;
@@ -158,231 +219,33 @@ footer a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-md);
 }
 
 .settings-button:hover {
     background-color: var(--settings-btn-hover);
     transform: translateY(-2px) rotate(90deg);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-lg);
+}
+
+.settings-button:focus {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 2px;
 }
 
 .settings-button:active {
     transform: translateY(0) rotate(180deg);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
 }
 
 .settings-button i {
-    transition: transform 0.3s ease;
+    transition: transform var(--transition-normal);
 }
 
-/* Responsive para el botón de configuración */
-@media (max-width: 768px) {
-    .settings-button {
-        width: 48px;
-        height: 48px;
-        font-size: 18px;
-        bottom: 15px;
-        right: 15px;
-    }
-}
-
-/* Estilos para la sección de configuración de temas */
-.theme-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 1rem;
-}
-
-.theme-section {
-    background-color: var(--bg-color);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    padding: 1rem;
-    margin-bottom: 2rem;
-}
-
-.theme-section h2 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-    font-weight: 600;
-}
-
-.theme-mode-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.theme-toggle {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-}
-
-.theme-option {
-    position: relative;
-    flex: 1;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.theme-preview {
-    padding: 1rem;
-    min-height: 200px;
-}
-
-.light-preview {
-    background-color: #fff;
-    color: #24292f;
-}
-
-.dark-preview {
-    background-color: #0d1117;
-    color: #c9d1d9;
-}
-
-.gray-preview {
-    background-color: #f0f0f0;
-    color: #c9d1d9;
-}
-
-.dalton-preview {
-    background-color: #ffffff;    /* Un azul más visible para deuteranómalos */
-    color: #FFFFFF;               /* Texto blanco para mejor contraste */
-}
-
-.preview-content {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.preview-header {
-    height: 20px;
-    width: 100%;
-    background-color: #d0d7de;
-    border-radius: 3px;
-    opacity: 0.7;
-}
-
-.dark-preview .preview-header {
-    background-color: #484f58;
-}
-
-.preview-text {
-    height: 10px;
-    width: 70%;
-    background-color: #d0d7de;
-    border-radius: 3px;
-    opacity: 0.7;
-    margin-bottom: 0.5rem;
-}
-
-.dark-preview .preview-text {
-    background-color: #484f58;
-}
-
-.preview-progress {
-    height: 10px;
-    background-color: #2da44e;
-    width: 70%;
-    border-radius: 3px;
-    margin-bottom: 0.5rem;
-}
-
-.theme-label {
-    padding: 0.5rem;
-    text-align: center;
-    border-top: 1px solid var(--border-color);
-    font-weight: 500;
-}
-
-.light-label {
-    background-color: #f6f8fa;
-    color: #24292f;
-}
-
-.dark-label {
-    background-color: #21262d;
-    color: #c9d1d9;
-}
-
-.gray-label {
-    background-color: #484f58;
-    color: #c9d1d9;
-}
-
-.dalton-label {
-    background-color: #26415c;
-    color: #b3b6ba;
-}
-
-.theme-select {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 2px solid var(--accent-color);
-    display: none;
-}
-
-.theme-select.active {
-    display: block;
-    background-color: var(--accent-color);
-}
-
-.sync-option {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    cursor: pointer;
-    margin-bottom: 1rem;
-}
-
-.sync-option span {
-    margin-left: 0.5rem;
-}
-
-.theme-colors {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1rem;
-}
-
-.color-option {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 2px solid transparent;
-}
-
-.color-option.active {
-    border-color: var(--accent-color);
-}
-
-.white {
-    background-color: #fff;
-    border: 1px solid #d0d7de;
-}
-
-.dark {
-    background-color: #0d1117;
-}
-
-.dimmed {
-    background-color: #22272e;
-}
-
+/* ===================================
+   Modal de configuración mejorado
+   =================================== */
 .settings-modal {
     position: fixed;
     top: 0;
@@ -390,12 +253,13 @@ footer a:hover {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.4s ease;
+    transition: opacity var(--transition-slow);
     z-index: 999999;
     padding: 20px;
     box-sizing: border-box;
@@ -412,27 +276,39 @@ footer a:hover {
     max-width: 650px;
     max-height: calc(100vh - 40px);
     padding: 32px;
-    border-radius: 16px;
+    border-radius: var(--radius-xl);
     position: relative;
     overflow-y: auto;
-    animation: slideUp 0.4s ease;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    animation: slideUp var(--transition-slow);
+    box-shadow: var(--shadow-xl);
 }
 
-/* Scroll personalizado */
+/* Animación de entrada mejorada */
+@keyframes slideUp {
+    from {
+        transform: translateY(30px) scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Scrollbar personalizado */
 .settings-content::-webkit-scrollbar {
     width: 8px;
 }
 
 .settings-content::-webkit-scrollbar-track {
     background: var(--highlight-bg);
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
 }
 
 .settings-content::-webkit-scrollbar-thumb {
     background: var(--border-color);
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
+    border-radius: var(--radius-sm);
+    transition: background-color var(--transition-fast);
 }
 
 .settings-content::-webkit-scrollbar-thumb:hover {
@@ -445,21 +321,12 @@ footer a:hover {
     scrollbar-color: var(--border-color) var(--highlight-bg);
 }
 
-@keyframes slideUp {
-    from {
-        transform: translateY(30px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
+/* Clase hidden */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
+/* Botón de cerrar mejorado */
 .close-button {
     position: absolute;
     top: 16px;
@@ -469,138 +336,176 @@ footer a:hover {
     border: none;
     color: var(--text-color);
     cursor: pointer;
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.2s ease;
+    transition: all var(--transition-fast);
 }
 
 .close-button:hover {
     background-color: var(--highlight-bg);
+    transform: rotate(90deg);
 }
 
-/* Sección de temas compacta */
+.close-button:focus {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* ===================================
+   Sección de temas mejorada
+   =================================== */
 .theme-section {
-    margin-bottom: 24px;
+    margin-bottom: var(--spacing-xl);
 }
 
 .theme-section h2 {
     color: var(--text-color);
-    margin: 0 0 8px 0;
-    font-size: 1.4rem;
+    margin: 0 0 var(--spacing-sm) 0;
+    font-size: 1.5rem;
     font-weight: 600;
 }
 
 .theme-section p {
-    color: #666;
-    margin: 0 0 20px 0;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin: 0 0 var(--spacing-lg) 0;
     font-size: 0.9rem;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
-/* Opción de sincronizar más compacta */
+/* Opción de sincronizar mejorada */
 .sync-option {
     display: flex;
     align-items: center;
-    padding: 12px 16px;
+    padding: var(--spacing-md);
     background-color: var(--highlight-bg);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
-    margin-bottom: 8px;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-sm);
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: all var(--transition-fast);
 }
 
 .sync-option:hover {
-    background-color: #e9ecef;
+    background-color: var(--border-color);
+    transform: translateY(-1px);
+}
+
+.sync-option:focus {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+.sync-option[aria-checked="true"] {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+.sync-option[aria-checked="true"] i {
+    color: white;
 }
 
 .sync-option i {
     color: var(--accent-color);
-    margin-right: 12px;
+    margin-right: var(--spacing-md);
     font-size: 1.1rem;
 }
 
 .sync-option span {
     font-weight: 500;
-    color: var(--text-color);
+    color: inherit;
 }
 
 #syncDescription {
     font-size: 0.8rem;
-    color: #666;
-    margin: 0 0 16px 0;
+    color: var(--text-color);
+    opacity: 0.7;
+    margin: 0 0 var(--spacing-lg) 0;
 }
 
-/* Temas en grid compacto */
+/* ===================================
+   Grid de temas mejorado
+   =================================== */
 .theme-toggle {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
 }
 
 .theme-option {
     position: relative;
     cursor: pointer;
     border: 2px solid var(--border-color);
-    border-radius: 8px;
-    padding: 12px;
-    transition: all 0.2s ease;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    transition: all var(--transition-fast);
     background: var(--bg-color);
 }
 
 .theme-option:hover {
     border-color: var(--accent-color);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+    box-shadow: var(--shadow-md);
 }
 
-.theme-option.selected {
+.theme-option:focus {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+.theme-option[aria-checked="true"] {
     border-color: var(--accent-color);
     background-color: var(--highlight-bg);
+    box-shadow: var(--shadow-sm);
 }
 
+/* Indicador de selección mejorado */
 .theme-select {
     position: absolute;
     top: 8px;
     right: 8px;
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     border: 2px solid var(--border-color);
     border-radius: 50%;
     background: var(--bg-color);
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast);
+    display: none;
 }
 
-.theme-option.selected .theme-select {
+.theme-option[aria-checked="true"] .theme-select {
+    display: block;
     background: var(--accent-color);
     border-color: var(--accent-color);
 }
 
-.theme-option.selected .theme-select::after {
+.theme-option[aria-checked="true"] .theme-select::after {
     content: '';
     position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 8px;
-    height: 8px;
+    top: 3px;
+    left: 3px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background: white;
 }
 
+/* Previews de temas mejorados */
 .theme-preview {
-    height: 40px;
-    border-radius: 4px;
-    margin-bottom: 8px;
+    height: 50px;
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-sm);
     position: relative;
     overflow: hidden;
 }
 
 .light-preview {
-    background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
     border: 1px solid #e9ecef;
 }
 
@@ -609,37 +514,37 @@ footer a:hover {
 }
 
 .gray-preview {
-    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+    background: linear-gradient(135deg, #f5f5f5 0%, #d0d0d0 100%);
 }
 
 .dalton-preview {
-    background: linear-gradient(135deg, #4a90e2 0%, #7bb3f0 100%);
+    background: linear-gradient(135deg, #4a7c7e 0%, #5a8e90 100%);
 }
 
 .preview-content {
-    padding: 6px;
+    padding: 8px;
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 4px;
 }
 
 .preview-header {
-    height: 8px;
-    background: rgba(0, 0, 0, 0.3);
+    height: 10px;
+    background: rgba(0, 0, 0, 0.2);
     border-radius: 2px;
     width: 60%;
 }
 
 .preview-text {
-    height: 4px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 1px;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
     width: 80%;
 }
 
 .preview-progress {
-    height: 4px;
+    height: 6px;
     background: var(--accent-color);
     border-radius: 2px;
     width: 40%;
@@ -647,58 +552,61 @@ footer a:hover {
 
 .dark-preview .preview-header,
 .dark-preview .preview-text {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.3);
 }
 
+/* Labels de temas */
 .theme-label {
     display: flex;
     align-items: center;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 500;
     color: var(--text-color);
 }
 
 .theme-label i {
-    margin-right: 6px;
-    font-size: 0.9rem;
+    margin-right: var(--spacing-sm);
+    font-size: 1rem;
     color: var(--accent-color);
 }
 
-/* Sección de accesibilidad mejorada */
+/* ===================================
+   Sección de accesibilidad mejorada
+   =================================== */
 .accessibility-section {
-    padding: 20px 0 0 0;
+    padding: var(--spacing-xl) 0 0 0;
     border-top: 1px solid var(--border-color);
 }
 
 .accessibility-section h2 {
     color: var(--text-color);
-    margin: 0 0 8px 0;
-    font-size: 1.4rem;
+    margin: 0 0 var(--spacing-sm) 0;
+    font-size: 1.5rem;
     font-weight: 600;
 }
 
 .accessibility-section p {
-    color: #666;
-    margin: 0 0 16px 0;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin: 0 0 var(--spacing-lg) 0;
     font-size: 0.9rem;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
-.accessibility-options {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
+/* Opción de accesibilidad */
 .accessibility-option {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 20px;
-    border-radius: 8px;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
     background-color: var(--highlight-bg);
     border: 1px solid var(--border-color);
-    min-height: 60px;
+    transition: all var(--transition-fast);
+}
+
+.accessibility-option:hover {
+    background-color: var(--border-color);
 }
 
 .accessibility-option-content {
@@ -708,10 +616,10 @@ footer a:hover {
 }
 
 .accessibility-option i {
-    font-size: 1.2rem;
-    margin-right: 16px;
+    font-size: 1.25rem;
+    margin-right: var(--spacing-lg);
     color: var(--accent-color);
-    min-width: 20px;
+    min-width: 24px;
 }
 
 .accessibility-option-text {
@@ -728,22 +636,25 @@ footer a:hover {
 }
 
 .accessibility-option-description {
-    font-size: 0.85rem;
-    color: #666;
-    line-height: 1.3;
+    font-size: 0.875rem;
+    color: var(--text-color);
+    opacity: 0.7;
+    line-height: 1.4;
 }
 
-/* Toggle switch mejorado */
+/* ===================================
+   Toggle switch mejorado con accesibilidad
+   =================================== */
 .toggle-switch {
     position: relative;
-    width: 50px;
+    width: 52px;
     height: 28px;
     background-color: var(--border-color);
     border-radius: 14px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color var(--transition-normal);
     flex-shrink: 0;
-    margin-left: 16px;
+    margin-left: var(--spacing-lg);
 }
 
 .toggle-switch::before {
@@ -755,49 +666,97 @@ footer a:hover {
     height: 24px;
     background-color: white;
     border-radius: 50%;
-    transition: transform 0.3s ease;
+    transition: transform var(--transition-normal);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.toggle-switch.active {
+.toggle-switch[aria-checked="true"] {
     background-color: var(--accent-color);
 }
 
-.toggle-switch.active::before {
-    transform: translateX(22px);
+.toggle-switch[aria-checked="true"]::before {
+    transform: translateX(24px);
 }
 
-/* Eliminar estilos antiguos del btn-toggle */
-.btn-toggle {
-    display: none;
+.toggle-switch:focus {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 2px;
 }
 
-/* Eliminar estilos antiguos que causan conflictos */
-/* .btn-toggle - estilos removidos completamente */
+/* Estado hover */
+.toggle-switch:hover {
+    opacity: 0.8;
+}
 
-/* .toggle-switch - estilos actualizados arriba */
-
-/* Responsive mejorado */
+/* ===================================
+   Responsive mejorado
+   =================================== */
 @media (max-width: 768px) {
     .settings-content {
         max-width: 400px;
-        padding: 24px 20px;
+        padding: var(--spacing-xl) var(--spacing-lg);
         margin: 15px;
         max-height: calc(100vh - 30px);
     }
 
     .theme-section h2,
     .accessibility-section h2 {
-        font-size: 1.3rem;
+        font-size: 1.35rem;
     }
 
     .theme-toggle {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: var(--spacing-md);
     }
 
     .theme-option {
-        padding: 12px;
+        padding: var(--spacing-md);
+    }
+
+    .theme-preview {
+        height: 40px;
+    }
+
+    .accessibility-option {
+        padding: var(--spacing-md);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+
+    .accessibility-option-content {
+        width: 100%;
+    }
+
+    .toggle-switch {
+        align-self: flex-end;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .settings-button {
+        width: 48px;
+        height: 48px;
+        font-size: 18px;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .settings-content {
+        max-width: 350px;
+        padding: var(--spacing-lg) var(--spacing-md);
+        margin: 10px;
+        max-height: calc(100vh - 20px);
+    }
+
+    .theme-section h2,
+    .accessibility-section h2 {
+        font-size: 1.25rem;
+    }
+
+    .theme-option {
+        padding: var(--spacing-sm);
     }
 
     .theme-preview {
@@ -805,62 +764,7 @@ footer a:hover {
     }
 
     .accessibility-option {
-        padding: 16px;
-        min-height: auto;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-    }
-
-    .accessibility-option-content {
-        width: 100%;
-        margin-bottom: 8px;
-    }
-
-    .accessibility-option i {
-        margin-right: 12px;
-    }
-
-    .toggle-switch {
-        align-self: flex-end;
-        margin-left: 0;
-        width: 46px;
-        height: 26px;
-    }
-
-    .toggle-switch::before {
-        width: 22px;
-        height: 22px;
-    }
-
-    .toggle-switch.active::before {
-        transform: translateX(20px);
-    }
-}
-
-@media (max-width: 480px) {
-    .settings-content {
-        max-width: 350px;
-        padding: 20px 16px;
-        margin: 10px;
-        max-height: calc(100vh - 20px);
-    }
-
-    .theme-section h2,
-    .accessibility-section h2 {
-        font-size: 1.2rem;
-    }
-
-    .theme-option {
-        padding: 10px;
-    }
-
-    .theme-preview {
-        height: 32px;
-    }
-
-    .accessibility-option {
-        padding: 14px;
+        padding: var(--spacing-md);
     }
 
     .accessibility-option-title {
@@ -870,34 +774,20 @@ footer a:hover {
     .accessibility-option-description {
         font-size: 0.8rem;
     }
-
-    .toggle-switch {
-        width: 44px;
-        height: 24px;
-    }
-
-    .toggle-switch::before {
-        width: 20px;
-        height: 20px;
-    }
-
-    .toggle-switch.active::before {
-        transform: translateX(20px);
-    }
 }
 
 @media (max-width: 360px) {
     .settings-content {
         max-width: 320px;
-        padding: 16px 12px;
+        padding: var(--spacing-md) var(--spacing-sm);
     }
 
     .theme-toggle {
-        gap: 8px;
+        gap: var(--spacing-sm);
     }
 
     .theme-option {
-        padding: 8px;
+        padding: var(--spacing-sm);
     }
 
     .theme-preview {
@@ -909,11 +799,178 @@ footer a:hover {
     }
 
     .accessibility-option {
-        padding: 12px;
+        padding: var(--spacing-sm);
     }
 
     .accessibility-option i {
         font-size: 1.1rem;
-        margin-right: 10px;
+        margin-right: var(--spacing-md);
+    }
+}
+
+/* ===================================
+   Animaciones adicionales
+   =================================== */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.settings-button:hover {
+    animation: pulse 2s infinite;
+}
+
+/* ===================================
+   Estados de alto contraste
+   =================================== */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #000;
+        --accent-color: #0050d8;
+    }
+
+    [data-theme="dark"] {
+        --border-color: #fff;
+        --accent-color: #6bb6ff;
+    }
+
+    .theme-option,
+    .sync-option,
+    .accessibility-option {
+        border-width: 3px;
+    }
+
+    .toggle-switch {
+        border: 2px solid var(--text-color);
+    }
+}
+
+/* ===================================
+   Modo de movimiento reducido
+   =================================== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .settings-button:hover {
+        animation: none;
+    }
+}
+
+/* ===================================
+   Print styles para temas
+   =================================== */
+@media print {
+    .settings-button,
+    .settings-modal {
+        display: none !important;
+    }
+
+    :root {
+        --bg-color: white !important;
+        --text-color: black !important;
+        --header-bg: #f0f0f0 !important;
+        --footer-bg: #f0f0f0 !important;
+    }
+}
+
+/* ===================================
+   Modo lector de pantalla activo
+   =================================== */
+body[data-screen-reader="true"] *:focus {
+    outline: 4px solid var(--accent-color) !important;
+    outline-offset: 4px !important;
+}
+
+body[data-screen-reader="true"] .sr-only {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    clip: auto !important;
+    white-space: normal !important;
+    border: 0 !important;
+}
+
+/* ===================================
+   Utilidades de tema
+   =================================== */
+.theme-bg-primary {
+    background-color: var(--primary-color);
+}
+
+.theme-bg-secondary {
+    background-color: var(--secondary-color);
+}
+
+.theme-text-primary {
+    color: var(--primary-color);
+}
+
+.theme-text-secondary {
+    color: var(--secondary-color);
+}
+
+.theme-border {
+    border-color: var(--border-color);
+}
+
+/* ===================================
+   Mejoras de contraste para accesibilidad
+   =================================== */
+.high-contrast {
+    filter: contrast(1.2);
+}
+
+/* Asegurar contraste mínimo WCAG AA */
+[data-theme="dark"] .btn-compra {
+    color: #ffffff;
+}
+
+[data-theme="grayscale"] .btn-compra {
+    color: #ffffff;
+}
+
+[data-theme="colorblind"] .btn-compra {
+    color: #ffffff;
+}
+
+/* ===================================
+   Indicadores de focus mejorados
+   =================================== */
+*:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 3px;
+}
+
+/* ===================================
+   Mejoras de rendimiento
+   =================================== */
+@media (prefers-reduced-data: reduce) {
+    * {
+        background-image: none !important;
+    }
+    
+    .theme-preview {
+        background: var(--bg-color) !important;
     }
 }
