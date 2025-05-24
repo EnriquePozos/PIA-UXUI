@@ -14,6 +14,105 @@ function leerTexto(texto) {
 // Event listener para que se ejecute cuando el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', () => {
 
+  const userButton = document.getElementById('userButton');
+
+    function setupUserInterface() {
+          // Dropdown del usuario
+          if (userButton) {
+              userButton.addEventListener('click', toggleUserDropdown);
+          }
+          
+          // Cerrar dropdown al hacer click fuera
+          document.addEventListener('click', (e) => {
+              if (!userButton.contains(e.target) && !userDropdown.contains(e.target)) {
+                  closeUserDropdown();
+              }
+          });
+          
+          // Logout
+          if (logoutBtn) {
+              logoutBtn.addEventListener('click', handleLogout);
+          }
+    }
+      
+      function updateUserInterface() {
+          if (isLoggedIn && currentUser) {
+              // Usuario logueado - mostrar nombre del usuario
+              const displayName = currentUser.displayName || currentUser.usuario || 'Usuario';
+              userName.textContent = displayName;
+              userDropdownHeader.innerHTML = `
+                  <i class="fas fa-user-circle"></i>
+                  <span>¡Hola, ${displayName}!</span>
+              `;
+              
+              // Mostrar elementos para usuario logueado
+              document.querySelectorAll('.user-only').forEach(el => {
+                  el.style.display = 'flex';
+              });
+              
+              // Ocultar elementos para invitados
+              document.querySelectorAll('.guest-only').forEach(el => {
+                  el.style.display = 'none';
+              });
+              
+          } else {
+              // Usuario no logueado
+              userName.textContent = 'Iniciar sesión';
+              userDropdownHeader.innerHTML = `
+                  <i class="fas fa-user-circle"></i>
+                  <span>¡Hola!</span>
+              `;
+              
+              // Ocultar elementos para usuario logueado
+              document.querySelectorAll('.user-only').forEach(el => {
+                  el.style.display = 'none';
+              });
+              
+              // Mostrar elementos para invitados
+              document.querySelectorAll('.guest-only').forEach(el => {
+                  el.style.display = 'flex';
+              });
+          }
+      }
+      
+      function toggleUserDropdown() {
+          const isOpen = userDropdown.classList.contains('show');
+          
+          if (isOpen) {
+              closeUserDropdown();
+          } else {
+              openUserDropdown();
+          }
+      }
+      
+      function openUserDropdown() {
+          userDropdown.classList.add('show');
+          userButton.setAttribute('aria-expanded', 'true');
+          announceToScreenReader('Menú de usuario abierto');
+      }
+      
+      function closeUserDropdown() {
+          userDropdown.classList.remove('show');
+          userButton.setAttribute('aria-expanded', 'false');
+      }
+      
+      function handleLogout() {
+          currentUser = null;
+          isLoggedIn = false;
+          localStorage.removeItem('currentUser');
+          
+          announceToScreenReader('Sesión cerrada correctamente');
+          showSuccess('Sesión cerrada correctamente');
+          
+          updateUserInterface();
+          closeUserDropdown();
+          
+          // Redirigir al inicio
+          setTimeout(() => {
+              window.location.href = 'index.html';
+          }, 1500);
+      }
+
   // Lector del header (si existe un elemento con clase .menu dentro del header)
   const menuHeader = document.querySelector("header .menu"); // Más específico
   if (menuHeader) {
@@ -136,4 +235,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   });
 
+  setupUserInterface();
 }); // Fin del DOMContentLoaded

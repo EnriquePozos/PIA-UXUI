@@ -89,6 +89,27 @@
         </a>
         
         <div class="header-actions">
+          <div class="user-section" id="userSection">
+              <button class="user-button" id="userButton" aria-label="Cuenta de usuario" aria-expanded="false">
+                  <i class="fas fa-user-circle" aria-hidden="true"></i>
+                  <span class="user-name" id="userName">Iniciar sesión</span>
+                  <i class="fas fa-chevron-down" aria-hidden="true"></i>
+              </button>
+              
+              <!-- Dropdown del usuario -->
+              <div class="user-dropdown" id="userDropdown" role="menu" aria-labelledby="userButton">
+                  <div class="user-dropdown-header" id="userDropdownHeader">
+                      <i class="fas fa-user-circle"></i>
+                      <span>¡Hola!</span>
+                  </div>
+                  <div class="user-dropdown-links">
+                      <button class="logout-btn" id="logoutBtn" role="menuitem">
+                          <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                      </button>
+                  </div>
+              </div>
+          </div>
+
           <button id="btnCompraHeader" class="btn-compra btn-header">
             <i class="fas fa-shopping-cart" aria-hidden="true"></i>
             <span>Comprar</span>
@@ -129,20 +150,6 @@
     </aside>
 
     <main id="main-content">
-      <!-- BreadCrumb mejorado -->
-      <!-- <nav aria-label="Migas de pan" class="breadcrumb-container">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item active" aria-current="page">Inicio</li>
-        </ol>
-      </nav> -->
-
-      <!-- Hero Section
-      <section class="hero-section" aria-labelledby="hero-title">
-        <div class="hero-content">
-          <h1 id="hero-title" class="hero-title">Bienvenido a Penny Juice</h1>
-          <p class="hero-subtitle">Jugos naturales de la más alta calidad para tu familia</p>
-        </div>
-      </section> -->
 
       <!-- Productos destacados -->
       <section class="featured-products" aria-labelledby="featured-title">
@@ -379,5 +386,6 @@
     <script src="user-state.js"></script>
     <script src="theme.js"></script>
     <script src="index.js"></script>
+
   </body>
 </html>

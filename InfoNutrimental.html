@@ -74,6 +74,26 @@
             </a>
             
             <div class="header-actions">
+                <div class="user-section" id="userSection">
+                    <button class="user-button" id="userButton" aria-label="Cuenta de usuario" aria-expanded="false">
+                        <i class="fas fa-user-circle" aria-hidden="true"></i>
+                        <span class="user-name" id="userName">Iniciar sesión</span>
+                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    
+                    <!-- Dropdown del usuario -->
+                    <div class="user-dropdown" id="userDropdown" role="menu" aria-labelledby="userButton">
+                        <div class="user-dropdown-header" id="userDropdownHeader">
+                            <i class="fas fa-user-circle"></i>
+                            <span>¡Hola!</span>
+                        </div>
+                        <div class="user-dropdown-links">
+                            <button class="logout-btn" id="logoutBtn" role="menuitem">
+                                <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <button id="btnCompraHeader" class="btn-compra btn-header">
                     <i class="fas fa-shopping-cart" aria-hidden="true"></i>
                     <span>Comprar</span>
@@ -315,6 +335,7 @@
         </div>
     </div>
 
+    <script src="user-state.js"></script>
     <script src="theme.js"></script>
     <script src="InfoNutrimental.js"></script>
 </body>

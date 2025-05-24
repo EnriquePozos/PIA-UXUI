@@ -186,29 +186,30 @@ document.addEventListener('DOMContentLoaded', function() {
     // ===================================
     function handleLogout() {
         // Confirmar logout
-        const confirmed = confirm('¿Estás seguro de que quieres cerrar sesión?');
-        if (confirmed.valueOf() === false) {
-            return;
-        }
-        
+        // const confirmed = window.confirm('¿Estás seguro de que quieres cerrar sesión?');
+        // if (!confirmed) {
+        //     return; // Si el usuario cancela, no se hace nada
+        // }
+
         // Limpiar estado
         currentUser = null;
         isLoggedIn = false;
         localStorage.removeItem('currentUser');
-        
+
         // Anunciar acción
         announceToScreenReader('Sesión cerrada correctamente');
         showSuccessMessage('Sesión cerrada correctamente');
-        
+
         // Actualizar interfaz
         updateUserInterface();
         closeUserDropdown();
-        
+
         // Redirigir al inicio después de un delay
         setTimeout(() => {
             window.location.href = 'login.html';
         }, 1500);
     }
+
     
     // ===================================
     // Utilidades
@@ -397,7 +398,9 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Current user:', currentUser);
         console.log('Is logged in:', isLoggedIn);
     }
-});// user-state.js - Gestión global del estado del usuario
+});
+
+// user-state.js - Gestión global del estado del usuario
 document.addEventListener('DOMContentLoaded', function() {
     
     // ===================================
@@ -589,19 +592,25 @@ document.addEventListener('DOMContentLoaded', function() {
     // Manejo del logout
     // ===================================
     function handleLogout() {
+        // Confirmar logout
+        // const confirmed = window.confirm('¿Estás seguro de que quieres cerrar sesión?');
+        // if (!confirmed) {
+        //     return; // Si el usuario cancela, no se hace nada
+        // }
+
         // Limpiar estado
         currentUser = null;
         isLoggedIn = false;
         localStorage.removeItem('currentUser');
-        
+
         // Anunciar acción
         announceToScreenReader('Sesión cerrada correctamente');
         showSuccessMessage('Sesión cerrada correctamente');
-        
+
         // Actualizar interfaz
         updateUserInterface();
         closeUserDropdown();
-        
+
         // Redirigir al inicio después de un delay
         setTimeout(() => {
             window.location.href = 'login.html';

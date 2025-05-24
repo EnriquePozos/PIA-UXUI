@@ -591,7 +591,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Redirigir al inicio
         setTimeout(() => {
-            window.location.href = 'index.html';
+            window.location.href = 'login.html';
         }, 1500);
     }
     
