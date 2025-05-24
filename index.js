@@ -1,4 +1,19 @@
 // index.js - Sistema completo de lector de pantalla para todos los elementos
+
+
+// Función modificada para pasar el producto seleccionado
+function irACompra(productoImagen = null) {
+    if (productoImagen) {
+        // Redirigir con parámetro del producto seleccionado
+        window.location.href = `compra.html?producto=${productoImagen}`;
+    } else {
+        // Redirigir sin producto específico (comportamiento por defecto)
+        window.location.href = 'compra.html';
+    }
+}
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     
     // ===================================

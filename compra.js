@@ -1,3 +1,75 @@
+// Agregar este código al final del DOMContentLoaded en compra.html
+
+// Función modificada para pasar el producto seleccionado
+function irACompra(productoImagen = null) {
+    if (productoImagen) {
+        // Redirigir con parámetro del producto seleccionado
+        window.location.href = `compra.html?producto=${productoImagen}`;
+    } else {
+        // Redirigir sin producto específico (comportamiento por defecto)
+        window.location.href = 'compra.html';
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    // ... tu código existente de temas ...
+    
+    // Función para obtener parámetros URL
+    function obtenerParametroURL(nombre) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(nombre);
+    }
+    
+    // Función para seleccionar el producto
+    function seleccionarProducto(imagenProducto) {
+        // Buscar el select del jugo
+        const selectJugo = document.getElementById('selectJugo');
+        if (selectJugo) {
+            // Buscar la opción que coincida con la imagen
+            for (let i = 0; i < selectJugo.options.length; i++) {
+                if (selectJugo.options[i].value === imagenProducto) {
+                    selectJugo.selectedIndex = i;
+                    // Disparar el evento change para actualizar la interfaz
+                    selectJugo.dispatchEvent(new Event('change'));
+                    break;
+                }
+            }
+        }
+        
+        // También actualizar la miniatura activa
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        thumbnails.forEach(thumb => {
+            thumb.classList.remove('active');
+            if (thumb.dataset.image === imagenProducto) {
+                thumb.classList.add('active');
+                // Actualizar la imagen principal
+                const imagenJugo = document.getElementById('imagenJugo');
+                if (imagenJugo) {
+                    imagenJugo.src = `imagenes/${imagenProducto}`;
+                }
+                
+                // Actualizar nombre y precio
+                const productName = document.getElementById('productName');
+                const currentPrice = document.getElementById('currentPrice');
+                const totalPrice = document.getElementById('totalPrice');
+                
+                if (productName) productName.textContent = thumb.dataset.name;
+                if (currentPrice) currentPrice.textContent = `$${thumb.dataset.price} MXN`;
+                if (totalPrice) totalPrice.textContent = `$${thumb.dataset.price} MXN`;
+            }
+        });
+    }
+    
+    // Verificar si hay un producto seleccionado en la URL
+    const productoSeleccionado = obtenerParametroURL('producto');
+    if (productoSeleccionado) {
+        // Esperar un poco para que se cargue completamente la página
+        setTimeout(() => {
+            seleccionarProducto(productoSeleccionado);
+        }, 100);
+    }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   // --- User State and Authentication (Example) ---
     // This part should align with your actual user authentication logic
