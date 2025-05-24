@@ -53,6 +53,9 @@ document.getElementById("btn-compra").addEventListener("focus", () => {
 // Asegúrate de que este script se ejecute después de que el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', function() {
 
+    let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+    let isLoggedIn = currentUser !== null;
+
     const userButton = document.getElementById('userButton');
 
     function setupUserInterface() {
@@ -111,6 +114,11 @@ document.addEventListener('DOMContentLoaded', function() {
               document.querySelectorAll('.guest-only').forEach(el => {
                   el.style.display = 'flex';
               });
+
+              const logoutBtnElement = document.getElementById('logoutBtn');
+              if (logoutBtnElement) {
+                  logoutBtnElement.style.display = 'none';
+              }
           }
       }
       
@@ -127,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
       function openUserDropdown() {
           userDropdown.classList.add('show');
           userButton.setAttribute('aria-expanded', 'true');
-          announceToScreenReader('Menú de usuario abierto');
+          //announceToScreenReader('Menú de usuario abierto');
       }
       
       function closeUserDropdown() {
@@ -239,4 +247,5 @@ document.addEventListener('DOMContentLoaded', function() {
     // Llamar a la función para cargar los productos cuando la página esté lista
     cargarProductosDestacados();
     setupUserInterface();
+    updateUserInterface();
 });

@@ -554,6 +554,11 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.guest-only').forEach(el => {
                 el.style.display = 'flex';
             });
+
+            const logoutBtnElement = document.getElementById('logoutBtn');
+            if (logoutBtnElement) {
+                logoutBtnElement.style.display = 'none';
+            }
         }
     }
     

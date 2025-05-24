@@ -160,7 +160,7 @@
    =================================== */
 .login-image {
     position: relative;
-    background: linear-gradient(135deg, var(--btn-compra-bg) 0%, var(--btn-compra-hover) 100%);
+    background: linear-gradient(135deg, white 0%, var(--btn-compra-hover) 100%);
     display: flex;
     align-items: center;
     justify-content: center;

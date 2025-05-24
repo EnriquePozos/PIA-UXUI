@@ -14,6 +14,9 @@ function leerTexto(texto) {
 // Event listener para que se ejecute cuando el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', () => {
 
+  let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+  let isLoggedIn = currentUser !== null;
+
   const userButton = document.getElementById('userButton');
 
     function setupUserInterface() {
@@ -72,6 +75,11 @@ document.addEventListener('DOMContentLoaded', () => {
               document.querySelectorAll('.guest-only').forEach(el => {
                   el.style.display = 'flex';
               });
+
+              const logoutBtnElement = document.getElementById('logoutBtn');
+              if (logoutBtnElement) {
+                  logoutBtnElement.style.display = 'none';
+              }
           }
       }
       
@@ -236,4 +244,5 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   setupUserInterface();
+  updateUserInterface();
 }); // Fin del DOMContentLoaded
