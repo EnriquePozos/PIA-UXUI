@@ -1,5 +1,3 @@
-// Agregar este código al final del DOMContentLoaded en compra.html
-
 // Función modificada para pasar el producto seleccionado
 function irACompra(productoImagen = null) {
     if (productoImagen) {
@@ -12,8 +10,6 @@ function irACompra(productoImagen = null) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    // ... tu código existente de temas ...
-    
     // Función para obtener parámetros URL
     function obtenerParametroURL(nombre) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -71,40 +67,508 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  // --- User State and Authentication (Example) ---
-    // This part should align with your actual user authentication logic
+    // --- GESTIÓN DEL CARRITO ---
+    let cart = JSON.parse(localStorage.getItem('pennyJuiceCart')) || [];
+
+    // Funciones del carrito
+    function saveCartToStorage() {
+        localStorage.setItem('pennyJuiceCart', JSON.stringify(cart));
+    }
+
+    function addToCart(product) {
+        const existingProduct = cart.find(item => item.id === product.id);
+        if (existingProduct) {
+            existingProduct.quantity += product.quantity;
+        } else {
+            cart.push({ ...product });
+        }
+        saveCartToStorage();
+        updateCartCount();
+    }
+
+    function removeFromCart(productId) {
+        cart = cart.filter(item => item.id !== productId);
+        saveCartToStorage();
+        updateCartCount();
+    }
+
+    function updateCartItemQuantity(productId, newQuantity) {
+        const product = cart.find(item => item.id === productId);
+        if (product) {
+            if (newQuantity <= 0) {
+                removeFromCart(productId);
+            } else {
+                product.quantity = newQuantity;
+                saveCartToStorage();
+            }
+        }
+        updateCartCount();
+    }
+
+    function clearCart() {
+        cart = [];
+        saveCartToStorage();
+        updateCartCount();
+    }
+
+    function getCartTotal() {
+        return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    }
+
+    function getCartItemCount() {
+        return cart.reduce((total, item) => total + item.quantity, 0);
+    }
+
+    function updateCartCount() {
+        const cartCountElement = document.getElementById('cartCount');
+        const count = getCartItemCount();
+        if (cartCountElement) {
+            cartCountElement.textContent = count;
+            if (count > 0) {
+                cartCountElement.style.display = 'flex';
+                cartCountElement.classList.remove('bounce');
+                void cartCountElement.offsetWidth; 
+                cartCountElement.classList.add('bounce');
+            } else {
+                cartCountElement.style.display = 'none';
+            }
+        }
+    }
+
+    // --- MODAL DEL CARRITO ---
+    function createCartModal() {
+        const existingModal = document.getElementById('cartModal');
+        if (existingModal) existingModal.remove();
+
+        const modal = document.createElement('div');
+        modal.id = 'cartModal';
+        modal.setAttribute('role', 'dialog');
+        modal.setAttribute('aria-modal', 'true');
+        modal.setAttribute('aria-labelledby', 'cartModalTitle');
+        Object.assign(modal.style, {
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0,0,0,0.6)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: '1050',
+            fontFamily: 'Arial, sans-serif'
+        });
+
+        const modalContent = document.createElement('div');
+        Object.assign(modalContent.style, {
+            backgroundColor: 'var(--bg-color, white)',
+            color: 'var(--text-color, #333)',
+            padding: '0',
+            borderRadius: '12px',
+            width: '90%',
+            maxWidth: '600px',
+            maxHeight: '80vh',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column'
+        });
+
+        // Header del modal
+        const header = document.createElement('div');
+        Object.assign(header.style, {
+            padding: '20px 25px',
+            borderBottom: '1px solid var(--border-color, #e0e0e0)',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            backgroundColor: 'var(--highlight-bg, #f6f8fa)'
+        });
+
+        const title = document.createElement('h2');
+        title.id = 'cartModalTitle';
+        title.textContent = 'Carrito de Compras';
+        Object.assign(title.style, {
+            margin: '0',
+            fontSize: '1.5rem',
+            fontWeight: '600',
+            color: 'var(--text-color, #24292f)'
+        });
+
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '&times;';
+        Object.assign(closeBtn.style, {
+            background: 'none',
+            border: 'none',
+            fontSize: '2rem',
+            cursor: 'pointer',
+            color: 'var(--text-color, #666)',
+            padding: '0',
+            width: '30px',
+            height: '30px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: '50%',
+            transition: 'all 0.3s ease'
+        });
+        closeBtn.addEventListener('click', () => modal.remove());
+        closeBtn.addEventListener('mouseover', () => {
+            closeBtn.style.backgroundColor = 'var(--border-color, #e0e0e0)';
+        });
+        closeBtn.addEventListener('mouseout', () => {
+            closeBtn.style.backgroundColor = 'transparent';
+        });
+
+        header.appendChild(title);
+        header.appendChild(closeBtn);
+
+        // Contenido del carrito
+        const cartContent = document.createElement('div');
+        Object.assign(cartContent.style, {
+            flex: '1',
+            overflow: 'auto',
+            padding: '20px 25px'
+        });
+
+        if (cart.length === 0) {
+            const emptyMessage = document.createElement('div');
+            Object.assign(emptyMessage.style, {
+                textAlign: 'center',
+                padding: '40px',
+                color: 'var(--text-color, #666)'
+            });
+            emptyMessage.innerHTML = `
+                <i class="fas fa-shopping-cart" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
+                <p style="font-size: 1.2rem; margin-bottom: 10px;">Tu carrito está vacío</p>
+                <p style="opacity: 0.7;">Agrega algunos productos para comenzar</p>
+            `;
+            cartContent.appendChild(emptyMessage);
+        } else {
+            // Lista de productos
+            cart.forEach(item => {
+                const productRow = document.createElement('div');
+                Object.assign(productRow.style, {
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: '15px 0',
+                    borderBottom: '1px solid var(--border-color, #e0e0e0)',
+                    gap: '15px'
+                });
+
+                // Imagen del producto
+                const productImage = document.createElement('img');
+                productImage.src = `imagenes/${item.image}`;
+                productImage.alt = item.name;
+                Object.assign(productImage.style, {
+                    width: '60px',
+                    height: '60px',
+                    objectFit: 'contain',
+                    borderRadius: '8px',
+                    backgroundColor: 'var(--highlight-bg, #f6f8fa)',
+                    padding: '5px'
+                });
+
+                // Información del producto
+                const productInfo = document.createElement('div');
+                Object.assign(productInfo.style, {
+                    flex: '1'
+                });
+
+                const productName = document.createElement('h4');
+                productName.textContent = item.name;
+                Object.assign(productName.style, {
+                    margin: '0 0 5px 0',
+                    fontSize: '1rem',
+                    fontWeight: '600',
+                    color: 'var(--text-color, #24292f)'
+                });
+
+                const productPrice = document.createElement('p');
+                productPrice.textContent = `$${item.price.toFixed(2)} MXN`;
+                Object.assign(productPrice.style, {
+                    margin: '0',
+                    color: 'var(--accent-color, #0969da)',
+                    fontWeight: '500'
+                });
+
+                productInfo.appendChild(productName);
+                productInfo.appendChild(productPrice);
+
+                // Controles de cantidad
+                const quantityControls = document.createElement('div');
+                Object.assign(quantityControls.style, {
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px'
+                });
+
+                const minusBtn = document.createElement('button');
+                minusBtn.innerHTML = '<i class="fas fa-minus"></i>';
+                Object.assign(minusBtn.style, {
+                    width: '32px',
+                    height: '32px',
+                    borderRadius: '50%',
+                    border: '1px solid var(--border-color, #d0d7de)',
+                    backgroundColor: 'var(--bg-color, white)',
+                    color: 'var(--text-color, #24292f)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '0.8rem',
+                    transition: 'all 0.3s ease'
+                });
+
+                const quantitySpan = document.createElement('span');
+                quantitySpan.textContent = item.quantity;
+                Object.assign(quantitySpan.style, {
+                    fontWeight: '600',
+                    minWidth: '30px',
+                    textAlign: 'center',
+                    fontSize: '1rem'
+                });
+
+                const plusBtn = document.createElement('button');
+                plusBtn.innerHTML = '<i class="fas fa-plus"></i>';
+                Object.assign(plusBtn.style, {
+                    width: '32px',
+                    height: '32px',
+                    borderRadius: '50%',
+                    border: '1px solid var(--border-color, #d0d7de)',
+                    backgroundColor: 'var(--accent-color, #0969da)',
+                    color: 'white',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '0.8rem',
+                    transition: 'all 0.3s ease'
+                });
+
+                // Botón eliminar
+                const removeBtn = document.createElement('button');
+                removeBtn.innerHTML = '<i class="fas fa-trash"></i>';
+                Object.assign(removeBtn.style, {
+                    width: '32px',
+                    height: '32px',
+                    borderRadius: '50%',
+                    border: '1px solid var(--btn-compra-bg, #D74B4B)',
+                    backgroundColor: 'var(--btn-compra-bg, #D74B4B)',
+                    color: 'white',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '0.8rem',
+                    transition: 'all 0.3s ease'
+                });
+
+                // Event listeners
+                minusBtn.addEventListener('click', () => {
+                    updateCartItemQuantity(item.id, item.quantity - 1);
+                    modal.remove();
+                    createCartModal();
+                });
+
+                plusBtn.addEventListener('click', () => {
+                    updateCartItemQuantity(item.id, item.quantity + 1);
+                    modal.remove();
+                    createCartModal();
+                });
+
+                removeBtn.addEventListener('click', () => {
+                    removeFromCart(item.id);
+                    showNotification(`${item.name} eliminado del carrito`, 'info');
+                    modal.remove();
+                    createCartModal();
+                });
+
+                // Hover effects
+                [minusBtn, plusBtn, removeBtn].forEach(btn => {
+                    btn.addEventListener('mouseover', () => {
+                        btn.style.transform = 'scale(1.1)';
+                    });
+                    btn.addEventListener('mouseout', () => {
+                        btn.style.transform = 'scale(1)';
+                    });
+                });
+
+                quantityControls.appendChild(minusBtn);
+                quantityControls.appendChild(quantitySpan);
+                quantityControls.appendChild(plusBtn);
+                quantityControls.appendChild(removeBtn);
+
+                productRow.appendChild(productImage);
+                productRow.appendChild(productInfo);
+                productRow.appendChild(quantityControls);
+
+                cartContent.appendChild(productRow);
+            });
+        }
+
+        // Footer del modal
+        if (cart.length > 0) {
+            const footer = document.createElement('div');
+            Object.assign(footer.style, {
+                padding: '20px 25px',
+                borderTop: '1px solid var(--border-color, #e0e0e0)',
+                backgroundColor: 'var(--highlight-bg, #f6f8fa)'
+            });
+
+            // Total
+            const totalSection = document.createElement('div');
+            Object.assign(totalSection.style, {
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: '15px',
+                fontSize: '1.2rem',
+                fontWeight: '600'
+            });
+
+            const totalLabel = document.createElement('span');
+            totalLabel.textContent = 'Total:';
+            totalLabel.style.color = 'var(--text-color, #24292f)';
+
+            const totalValue = document.createElement('span');
+            totalValue.textContent = `$${getCartTotal().toFixed(2)} MXN`;
+            totalValue.style.color = 'var(--accent-color, #0969da)';
+
+            totalSection.appendChild(totalLabel);
+            totalSection.appendChild(totalValue);
+
+            // Botones
+            const buttonsDiv = document.createElement('div');
+            Object.assign(buttonsDiv.style, {
+                display: 'flex',
+                gap: '10px',
+                justifyContent: 'space-between'
+            });
+
+            const clearBtn = document.createElement('button');
+            clearBtn.textContent = 'Vaciar Carrito';
+            Object.assign(clearBtn.style, {
+                flex: '1',
+                padding: '12px',
+                border: '2px solid var(--btn-compra-bg, #D74B4B)',
+                backgroundColor: 'transparent',
+                color: 'var(--btn-compra-bg, #D74B4B)',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontSize: '1rem',
+                fontWeight: '600',
+                transition: 'all 0.3s ease'
+            });
+
+            const checkoutBtn = document.createElement('button');
+            checkoutBtn.textContent = 'Proceder al Pago';
+            Object.assign(checkoutBtn.style, {
+                flex: '2',
+                padding: '12px',
+                border: 'none',
+                backgroundColor: 'var(--btn-compra-bg, #D74B4B)',
+                color: 'white',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontSize: '1rem',
+                fontWeight: '600',
+                transition: 'all 0.3s ease'
+            });
+
+            // Event listeners para botones
+            clearBtn.addEventListener('click', () => {
+                if (confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
+                    clearCart();
+                    showNotification('Carrito vaciado', 'info');
+                    modal.remove();
+                }
+            });
+
+            checkoutBtn.addEventListener('click', () => {
+                if(validarSesion() == false){
+                    showNotification('Debes iniciar sesión para proceder al pago.', 'error');
+                    return;
+                }
+
+                modal.remove();
+                showPurchaseModal(getCartItemCount(), "artículos en tu carrito", getCartTotal(), false);
+            });
+
+            // Hover effects
+            clearBtn.addEventListener('mouseover', () => {
+                clearBtn.style.backgroundColor = 'var(--btn-compra-bg, #D74B4B)';
+                clearBtn.style.color = 'white';
+            });
+            clearBtn.addEventListener('mouseout', () => {
+                clearBtn.style.backgroundColor = 'transparent';
+                clearBtn.style.color = 'var(--btn-compra-bg, #D74B4B)';
+            });
+
+            checkoutBtn.addEventListener('mouseover', () => {
+                checkoutBtn.style.backgroundColor = 'var(--btn-compra-hover, #e67b7b)';
+            });
+            checkoutBtn.addEventListener('mouseout', () => {
+                checkoutBtn.style.backgroundColor = 'var(--btn-compra-bg, #D74B4B)';
+            });
+
+            buttonsDiv.appendChild(clearBtn);
+            buttonsDiv.appendChild(checkoutBtn);
+
+            footer.appendChild(totalSection);
+            footer.appendChild(buttonsDiv);
+            modalContent.appendChild(footer);
+        }
+
+        modalContent.appendChild(header);
+        modalContent.appendChild(cartContent);
+        modal.appendChild(modalContent);
+        document.body.appendChild(modal);
+
+        // Cerrar modal al hacer click fuera
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.remove();
+            }
+        });
+
+        // Cerrar modal con ESC
+        const escapeHandler = (e) => {
+            if (e.key === 'Escape') {
+                modal.remove();
+                document.removeEventListener('keydown', escapeHandler);
+            }
+        };
+        document.addEventListener('keydown', escapeHandler);
+
+        return modal;
+    }
+
+    // --- User State and Authentication ---
     let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
     let isLoggedIn = currentUser !== null;
 
     // DOM Elements for User Dropdown
     const userButton = document.getElementById('userButton');
-    const userNameElement = document.getElementById('userName'); // Renamed to avoid conflict
-    const userDropdownElement = document.getElementById('userDropdown'); // Renamed
+    const userNameElement = document.getElementById('userName');
+    const userDropdownElement = document.getElementById('userDropdown');
     const userDropdownHeader = document.getElementById('userDropdownHeader');
     const logoutBtn = document.getElementById('logoutBtn');
-    // const successMessage = document.getElementById('successMessage'); // If you have a dedicated success message element
 
     function announceToScreenReader(message) {
-        // Basic implementation for screen reader announcements
         const announcement = document.createElement('div');
         announcement.setAttribute('aria-live', 'polite');
         announcement.setAttribute('aria-atomic', 'true');
-        announcement.className = 'sr-only'; // Make sure this class is defined in your CSS
+        announcement.className = 'sr-only';
         announcement.textContent = message;
         document.body.appendChild(announcement);
         setTimeout(() => announcement.remove(), 1000);
     }
 
-    function showSuccess(message) { // General success message display
-        // This can be a more sophisticated notification if you have one
-        // For now, using a simple alert or a custom notification like in compra.js
-        // To reuse compra.js showNotification, you'd need to expose it globally or duplicate
-        console.log("Success: ", message); // Placeholder
-        // Example: if (typeof window.showGlobalNotification === 'function') window.showGlobalNotification(message, 'success');
-        // else alert(message);
-        announceToScreenReader(message); // Announce it
+    function showSuccess(message) {
+        console.log("Success: ", message);
+        announceToScreenReader(message);
     }
-
 
     function setupUserInterface() {
         if (userButton) {
@@ -123,7 +587,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
       
     function updateUserInterface() {
-        if (!userNameElement || !userDropdownHeader) return; // Elements not found
+        if (!userNameElement || !userDropdownHeader) return;
 
         if (isLoggedIn && currentUser) {
             const displayName = currentUser.displayName || currentUser.usuario || 'Usuario';
@@ -137,7 +601,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             document.querySelectorAll('.user-only').forEach(el => el.style.display = 'flex');
             document.querySelectorAll('.guest-only').forEach(el => el.style.display = 'none');
-            if (logoutBtn) logoutBtn.style.display = 'flex'; // Ensure logout button is visible
+            if (logoutBtn) logoutBtn.style.display = 'flex';
             
         } else {
             userNameElement.textContent = 'Iniciar sesión';
@@ -175,7 +639,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!userDropdownElement || !userButton) return;
         userDropdownElement.classList.remove('show');
         userButton.setAttribute('aria-expanded', 'false');
-        // announceToScreenReader('Menú de usuario cerrado'); // Optional: announce on close
     }
       
     function handleLogout() {
@@ -183,27 +646,26 @@ document.addEventListener('DOMContentLoaded', () => {
         isLoggedIn = false;
         localStorage.removeItem('currentUser');
         
-        showSuccess('Sesión cerrada correctamente'); // This will also announce
+        showSuccess('Sesión cerrada correctamente');
         
         updateUserInterface();
         closeUserDropdown();
         
-        // Optional: Redirect to home or login page
         setTimeout(() => {
             if (window.location.pathname.includes('compra.html') || window.location.pathname.includes('InfoNutrimental.html')) {
-                 // window.location.href = 'index.html'; // Or login.html
+                 // window.location.href = 'index.html';
             }
         }, 1500);
     }
 
     // Initialize User Interface parts
-    if (document.getElementById('userButton')) { // Check if user elements are on the current page
+    if (document.getElementById('userButton')) {
         setupUserInterface();
         updateUserInterface();
     }  
   
-  // DOM Elements from compra.html
-    const cartCountElement = document.getElementById('cartCount');
+    // DOM Elements from compra.html
+    const cartBtn = document.getElementById('btnCarrito');
     const addToCartButton = document.getElementById('btn-add-cart');
     const buyNowButton = document.getElementById('btnCompra');
     const quantityInput = document.getElementById('selectCantidad');
@@ -216,8 +678,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const productNameElement = document.getElementById('productName');
     const thumbnails = document.querySelectorAll('.thumbnail');
 
-    let cartItemCount = 0;
     let currentProductPrice = 0;
+
+    // Event listener para abrir el carrito
+    if (cartBtn) {
+        cartBtn.addEventListener('click', () => {
+            createCartModal();
+        });
+    }
 
     // --- Helper Functions ---
     function showNotification(message, type = 'info', duration = 3500) {
@@ -245,7 +713,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (type === 'error') {
             notification.style.backgroundColor = 'var(--error-color, #dc3545)';
             notification.style.color = 'white';
-        } else { // info
+        } else {
             notification.style.backgroundColor = 'var(--accent-color, #17a2b8)';
             notification.style.color = 'white';
         }
@@ -267,20 +735,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- UI Update Functions ---
-    function updateCartNotification() {
-        if (cartCountElement) {
-            cartCountElement.textContent = cartItemCount;
-            if (cartItemCount > 0) {
-                cartCountElement.style.display = 'flex';
-                cartCountElement.classList.remove('bounce');
-                void cartCountElement.offsetWidth; 
-                cartCountElement.classList.add('bounce');
-            } else {
-                cartCountElement.style.display = 'none';
-            }
-        }
-    }
-
     function updateTotalProductPrice() {
         const quantity = parseInt(quantityInput.value) || 0;
         const total = quantity * currentProductPrice;
@@ -380,10 +834,18 @@ document.addEventListener('DOMContentLoaded', () => {
         addToCartButton.addEventListener('click', () => {
             const quantityToAdd = parseInt(quantityInput.value);
             if (quantityToAdd > 0) {
-                cartItemCount += quantityToAdd;
-                updateCartNotification();
+                const selectedOption = selectJugo.options[selectJugo.selectedIndex];
+                const product = {
+                    id: selectedOption.dataset.id || selectedOption.value,
+                    name: selectedOption.dataset.name,
+                    price: parseFloat(selectedOption.dataset.price),
+                    image: selectedOption.value,
+                    quantity: quantityToAdd
+                };
+                
+                addToCart(product);
                 const productName = productNameElement.textContent || "Producto seleccionado";
-                showNotification(`${quantityToAdd} unidad(es) de ${productName} añadidas al carrito. Total: ${cartItemCount}`, 'success');
+                showNotification(`${quantityToAdd} unidad(es) de ${productName} añadidas al carrito`, 'success');
             } else {
                 showNotification('Por favor, selecciona una cantidad mayor a cero.', 'error');
             }
@@ -396,14 +858,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentProductName = productNameElement.textContent;
             const currentItemTotalValue = currentProductQuantity * currentProductPrice;
 
-            if (cartItemCount === 0) { 
+            if (cart.length === 0) { 
                 if (currentProductQuantity <= 0) {
                     showNotification('Por favor, selecciona una cantidad para el artículo que deseas comprar.', 'info');
                     return;
                 }
                 showPurchaseModal(currentProductQuantity, currentProductName, currentItemTotalValue, true);
             } else { 
-                showPurchaseModal(cartItemCount, "artículos en tu carrito", null, false);
+                showPurchaseModal(getCartItemCount(), "artículos en tu carrito", getCartTotal(), false);
             }
         });
     }
@@ -439,9 +901,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const message = document.createElement('p');
         if (isDirectBuy && itemName && itemPrice !== null) {
-             message.textContent = `Estás a punto de comprar ${items} unidad(es) de "${itemName}" por un total de $${itemPrice.toFixed(2)} MXN.`;
+             message.textContent = `Estás a punto de comprar ${items} unidad(es) de "${itemName}" por un total de ${itemPrice.toFixed(2)} MXN.`;
         } else {
-             message.textContent = `Estás a punto de comprar ${items} artículo(s) de tu carrito. ¿Continuar?`;
+             message.textContent = `Estás a punto de comprar ${items} artículo(s) de tu carrito por un total de ${itemPrice.toFixed(2)} MXN. ¿Continuar?`;
         }
         message.style.marginBottom = '30px';
         message.style.fontSize = '1.1rem';
@@ -458,23 +920,20 @@ document.addEventListener('DOMContentLoaded', () => {
         Object.assign(confirmButton.style, buttonStyles, {
             backgroundColor: 'var(--btn-compra-bg, #D74B4B)', color: 'white'
         });
-        // Hover/active effects could be added via CSS classes for cleaner JS
         confirmButton.onmouseover = () => confirmButton.style.backgroundColor = 'var(--btn-compra-hover, #e67b7b)';
         confirmButton.onmouseout = () => confirmButton.style.backgroundColor = 'var(--btn-compra-bg, #D74B4B)';
-
 
         const cancelButton = document.createElement('button');
         cancelButton.textContent = 'Cancelar';
          Object.assign(cancelButton.style, buttonStyles, {
-            backgroundColor: 'var(--border-color, #6c757d)', color: 'var(--text-color, #333)' // Ensuring text is visible on themed background
+            backgroundColor: 'var(--border-color, #6c757d)', color: 'var(--text-color, #333)'
         });
-        cancelButton.onmouseover = () => cancelButton.style.backgroundColor = '#5a6268'; // Darken gray
+        cancelButton.onmouseover = () => cancelButton.style.backgroundColor = '#5a6268';
         cancelButton.onmouseout = () => cancelButton.style.backgroundColor = 'var(--border-color, #6c757d)';
 
-
         confirmButton.addEventListener('click', () => {
-            modal.remove(); // Remove this initial purchase modal
-            showBankTransactionModal(items, itemName, itemPrice, isDirectBuy); // Show bank modal
+            modal.remove();
+            showBankTransactionModal(items, itemName, itemPrice, isDirectBuy);
         });
 
         cancelButton.addEventListener('click', () => {
@@ -501,11 +960,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const modal = document.createElement('div');
         modal.id = 'bankTransactionModal';
-        // Basic modal styling (similar to purchaseModal)
          Object.assign(modal.style, {
             position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
             backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex',
-            alignItems: 'center', justifyContent: 'center', zIndex: '1010', // Higher z-index
+            alignItems: 'center', justifyContent: 'center', zIndex: '1010',
             fontFamily: 'Arial, sans-serif'
         });
 
@@ -516,7 +974,7 @@ document.addEventListener('DOMContentLoaded', () => {
             padding: '30px 40px', borderRadius: '10px', textAlign: 'left',
             minWidth: '350px', maxWidth: '500px', boxShadow: '0 5px 20px rgba(0,0,0,0.3)'
         });
-        formContent.addEventListener('submit', (e) => e.preventDefault()); // Prevent actual submission
+        formContent.addEventListener('submit', (e) => e.preventDefault());
 
         const title = document.createElement('h2');
         title.textContent = 'Detalles de Pago';
@@ -524,7 +982,6 @@ document.addEventListener('DOMContentLoaded', () => {
         title.style.marginBottom = '25px';
         title.style.fontSize = '1.6rem';
         title.style.color = 'var(--accent-color, #0969da)';
-
 
         // Input fields
         const fields = [
@@ -564,7 +1021,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formContent.appendChild(group);
         });
         
-        // Card number formatting (simple version)
+        // Card number formatting
         const cardNumberInput = formContent.querySelector('#cardNumber');
         if(cardNumberInput) {
             cardNumberInput.addEventListener('input', function(e) {
@@ -583,7 +1040,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-
         const buttonStyles = {
             padding: '12px 24px', border: 'none', borderRadius: '6px', cursor: 'pointer',
             fontSize: '1rem', fontWeight: '600', margin: '0 8px', minWidth: '120px',
@@ -599,7 +1055,6 @@ document.addEventListener('DOMContentLoaded', () => {
          payButton.onmouseover = () => payButton.style.backgroundColor = 'var(--btn-compra-hover, #e67b7b)';
          payButton.onmouseout = () => payButton.style.backgroundColor = 'var(--btn-compra-bg, #D74B4B)';
 
-
         const cancelBankButton = document.createElement('button');
         cancelBankButton.type = 'button';
         cancelBankButton.textContent = 'Cancelar';
@@ -610,12 +1065,12 @@ document.addEventListener('DOMContentLoaded', () => {
         cancelBankButton.onmouseout = () => cancelBankButton.style.backgroundColor = 'var(--border-color, #6c757d)';
 
         payButton.addEventListener('click', () => {
-            // Basic validation: check if all fields are filled
+            // Basic validation
             let isValid = true;
             formContent.querySelectorAll('input[required]').forEach(input => {
                 if (!input.value.trim()) {
                     isValid = false;
-                    input.style.borderColor = 'red'; // Highlight empty fields
+                    input.style.borderColor = 'red';
                 } else {
                     input.style.borderColor = 'var(--border-color, #ccc)';
                 }
@@ -626,12 +1081,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            cartItemCount = 0; 
-            updateCartNotification();
+            // Vaciar carrito después del pago exitoso
+            clearCart();
             modal.remove(); 
-            showNotification('¡Pago Exitoso! Tu compra ha sido completada y tu carrito vaciado.', 'success');
-            quantityInput.value = 1; 
-            updateTotalProductPrice(); 
+            showNotification('¡Pago Exitoso! Tu compra ha sido completada y tu carrito ha sido vaciado.', 'success');
+            if (quantityInput) {
+                quantityInput.value = 1; 
+                updateTotalProductPrice(); 
+            }
         });
 
         cancelBankButton.addEventListener('click', () => {
@@ -646,14 +1103,14 @@ document.addEventListener('DOMContentLoaded', () => {
         buttonsDiv.appendChild(cancelBankButton);
         
         formContent.appendChild(title);
-        formContent.appendChild(buttonsDiv); // Add buttons before this line if you want them above form fields
+        formContent.appendChild(buttonsDiv);
         modal.appendChild(formContent);
         document.body.appendChild(modal);
-        formContent.querySelector('#cardHolderName').focus(); // Focus on the first input field
+        formContent.querySelector('#cardHolderName').focus();
     }
 
     // --- Initial Setup ---
-    updateCartNotification(); 
+    updateCartCount(); 
     
     const initialThumbnail = document.querySelector('.thumbnail.active') || thumbnails[0];
     if (initialThumbnail) {
@@ -673,15 +1130,80 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if(quantityInput && parseInt(quantityInput.value) < 1) quantityInput.value = 1;
     updateTotalProductPrice();
+
+    // --- FUNCIONES GLOBALES PARA USAR EN OTROS ARCHIVOS ---
+    window.pennyJuiceCart = {
+        addToCart: addToCart,
+        removeFromCart: removeFromCart,
+        updateCartItemQuantity: updateCartItemQuantity,
+        clearCart: clearCart,
+        getCartTotal: getCartTotal,
+        getCartItemCount: getCartItemCount,
+        getCart: () => [...cart],
+        openCartModal: createCartModal
+    };
 });
 
-
+// Función de validación de sesión
 function validarSesion(){
     let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
     if (!currentUser) {
         alert('Por favor, inicia sesión para continuar.');
-        window.location.href = 'login.html'; // Redirigir a la página de inicio de sesión
+        window.location.href = 'login.html';
         return false;
     }
     return true;
+}
+
+// Función para agregar productos al carrito desde otras páginas
+function agregarAlCarritoDesdeOtraPagina(productoImagen, nombre, precio, cantidad = 1) {
+    // Verificar si ya existe el carrito en localStorage
+    let cart = JSON.parse(localStorage.getItem('pennyJuiceCart')) || [];
+    
+    const product = {
+        id: productoImagen,
+        name: nombre,
+        price: parseFloat(precio),
+        image: productoImagen,
+        quantity: parseInt(cantidad)
+    };
+    
+    // Buscar si el producto ya existe
+    const existingProduct = cart.find(item => item.id === product.id);
+    if (existingProduct) {
+        existingProduct.quantity += product.quantity;
+    } else {
+        cart.push(product);
+    }
+    
+    // Guardar en localStorage
+    localStorage.setItem('pennyJuiceCart', JSON.stringify(cart));
+    
+    // Mostrar notificación si existe la función
+    if (typeof showNotification === 'function') {
+        showNotification(`${product.quantity} unidad(es) de ${product.name} añadidas al carrito`, 'success');
+    }
+    
+    // Actualizar contador si existe
+    const cartCountElement = document.getElementById('cartCount');
+    if (cartCountElement) {
+        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+        cartCountElement.textContent = totalItems;
+        if (totalItems > 0) {
+            cartCountElement.style.display = 'flex';
+            cartCountElement.classList.add('bounce');
+        }
+    }
+    
+    return true;
+}
+
+// Función para obtener información del carrito desde otras páginas
+function obtenerInfoCarrito() {
+    const cart = JSON.parse(localStorage.getItem('pennyJuiceCart')) || [];
+    return {
+        items: cart,
+        totalItems: cart.reduce((total, item) => total + item.quantity, 0),
+        totalPrice: cart.reduce((total, item) => total + (item.price * item.quantity), 0)
+    };
 }
