@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Penny Juice - Compra jugos naturales de alta calidad">
-    <meta name="keywords" content="comprar jugos, penny juice, jugos naturales, bebidas saludables">
     <title>Comprar - Penny Juice</title>
 
     <!--Bootstrap -->
@@ -24,10 +23,7 @@
             const syncWithSystem = localStorage.getItem("syncWithSystem") === "true";
 
             function applyTheme(theme) {
-                // Primero quitamos cualquier atributo de tema anterior
                 document.documentElement.removeAttribute("data-theme");
-
-                // Aplicamos el nuevo tema según corresponda
                 if (theme === "dark") {
                     document.documentElement.setAttribute("data-theme", "dark");
                 } else if (theme === "grayscale") {
@@ -35,21 +31,16 @@
                 } else if (theme === "colorblind") {
                     document.documentElement.setAttribute("data-theme", "colorblind");
                 }
-                // Para el tema claro (light) no necesita atributo data-theme
             }
 
             if (syncWithSystem) {
-                // Detectar preferencia del sistema
                 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
                 applyTheme(prefersDark ? "dark" : "light");
-
-                // Escuchar cambios en preferencia del sistema
                 window.matchMedia("(prefers-color-scheme: dark)")
                     .addEventListener("change", function (e) {
                         applyTheme(e.matches ? "dark" : "light");
                     });
             } else {
-                // Aplicar tema guardado o tema claro por defecto
                 applyTheme(savedTheme || "light");
             }
         });
@@ -57,7 +48,7 @@
 </head>
 <body>
     <!-- Skip to main content link para accesibilidad -->
-    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+    <a href="#main-content" class="skip-link sr-only sr-only-focusable">Saltar al contenido principal</a>
 
     <header role="banner">
         <nav class="navbar" aria-label="Navegación principal">
@@ -114,152 +105,165 @@
 
     <aside id="popupMenu" class="popup-menu" role="navigation" aria-label="Menú de navegación">
         <div class="popup-menu-header">
-            <h2 class="popup-menu-title">Menú</h2>
+            <h2>Menú</h2>
             <button class="close-menu" aria-label="Cerrar menú" id="closeMenuBtn">
-                <i class="fas fa-times" aria-hidden="true"></i>
+                <i class="fas fa-times"></i>
             </button>
         </div>
-        <ul role="list">
-            <li><a href="index.html" aria-label="Ir a la página de inicio" id="Home">
-                <i class="fas fa-home" aria-hidden="true"></i>
-                <span>Inicio</span>
+        <ul>
+            <li><a href="index.html" aria-label="Ir a Home" id="Home">
+                <i class="fas fa-home"></i> Home
             </a></li>
-            <li><a href="compra.html" aria-label="Ir a la página de compra" id="Compra" class="active">
-                <i class="fas fa-shopping-cart" aria-hidden="true"></i>
-                <span>Compra</span>
+            <li><a href="compra.html" aria-label="Ir a Compra" id="Compra" class="active">
+                <i class="fas fa-shopping-cart"></i> Compra
             </a></li>
-            <li><a href="InfoNutrimental.html" aria-label="Ver información nutrimental" id="Informacion_Nutrimental">
-                <i class="fas fa-info-circle" aria-hidden="true"></i>
-                <span>Información nutrimental</span>
+            <li><a href="InfoNutrimental.html" aria-label="Ver Información nutrimental" id="Informacion_Nutrimental">
+                <i class="fas fa-info-circle"></i> Información nutrimental
             </a></li>
         </ul>
     </aside>
 
     <main id="main-content">
-        <section class="purchase-section" aria-labelledby="purchase-title">
-            <div class="container">
-                <h1 id="purchase-title" class="page-title">Selecciona tu Jugo Favorito</h1>
-                <p class="page-subtitle">Elige entre nuestra variedad de jugos naturales</p>
 
-                <div class="producto-contenedor">
-                    <div class="producto-imagen">
-                        <div class="image-wrapper">
-                            <img id="imagenJugo" src="imagenes/jugo-vista.png" alt="Jugo de Uva seleccionado" width="400" height="400">
-                            <div class="product-badge" id="productBadge">Nuevo</div>
-                        </div>
-                        <div class="image-thumbnails">
-                            <button class="thumbnail active" data-image="jugo-vista.png" data-name="Jugo de Uva" aria-label="Ver Jugo de Uva">
-                                <img src="imagenes/jugo-vista.png" alt="Miniatura Jugo de Uva" width="80" height="80">
-                            </button>
-                            <button class="thumbnail" data-image="jugo-defensa.png" data-name="Jugo de Naranja" aria-label="Ver Jugo de Naranja">
-                                <img src="imagenes/jugo-defensa.png" alt="Miniatura Jugo de Naranja" width="80" height="80">
-                            </button>
-                            <button class="thumbnail" data-image="jugo-gastro.png" data-name="Jugo de Manzana" aria-label="Ver Jugo de Manzana">
-                                <img src="imagenes/jugo-gastro.png" alt="Miniatura Jugo de Manzana" width="80" height="80">
-                            </button>
-                        </div>
-                    </div>
+        <!-- Contenedor principal del producto -->
+        <section class="producto-contenedor" aria-labelledby="producto-principal">
+            <div class="producto-imagen">
+                <div class="image-wrapper">
+                    <img id="imagenJugo" src="imagenes/jugo-vista.png" alt="Jugo seleccionado" width="300" height="300">
+                    <div class="product-badge">Nuevo</div>
+                </div>
                 
-                    <div class="producto-detalles">
-                        <div class="product-info">
-                            <h2 class="product-name" id="productName">Jugo de Uva</h2>
-                            <p class="product-description">
-                                Delicioso jugo 100% natural, sin azúcares añadidos. Rico en vitaminas y antioxidantes.
-                            </p>
-                            <div class="product-price">
-                                <span class="price-label">Precio:</span>
-                                <span class="price-value">$45.00 MXN</span>
-                            </div>
-                        </div>
+                <!-- Miniaturas de productos - ACTUALIZADO A 4 PRODUCTOS -->
+                <div class="image-thumbnails">
+                    <button class="thumbnail active" data-image="jugo-vista.png" data-name="Jugo de Uva" data-price="45.00" aria-label="Seleccionar Jugo de Uva">
+                        <img src="imagenes/jugo-vista.png" alt="Miniatura Jugo de Uva" width="80" height="80">
+                    </button>
+                    <button class="thumbnail" data-image="jugo-defensa.png" data-name="Jugo de Naranja" data-price="48.00" aria-label="Seleccionar Jugo de Naranja">
+                        <img src="imagenes/jugo-defensa.png" alt="Miniatura Jugo de Naranja" width="80" height="80">
+                    </button>
+                    <button class="thumbnail" data-image="jugo-gastro.png" data-name="Jugo de Manzana" data-price="42.00" aria-label="Seleccionar Jugo de Manzana">
+                        <img src="imagenes/jugo-gastro.png" alt="Miniatura Jugo de Manzana" width="80" height="80">
+                    </button>
+                    <button class="thumbnail" data-image="jugo-antiox.png" data-name="Jugo Antiox" data-price="50.00" aria-label="Seleccionar Jugo Antiox">
+                        <img src="imagenes/jugo-antiox.png" alt="Miniatura Jugo Antiox" width="80" height="80">
+                    </button>
+                </div>
+            </div>
 
-                        <form class="product-form" aria-label="Formulario de compra">
-                            <div class="form-group">
-                                <label for="selectJugo" class="form-label">Seleccione su jugo:</label>
-                                <select id="selectJugo" class="form-select" aria-describedby="jugoHelp">
-                                    <option value="jugo-vista.png" data-name="Jugo de Uva" data-price="45.00">Jugo de Uva - $45.00</option>
-                                    <option value="jugo-defensa.png" data-name="Jugo de Naranja" data-price="48.00">Jugo de Naranja - $48.00</option>
-                                    <option value="jugo-gastro.png" data-name="Jugo de Manzana" data-price="42.00">Jugo de Manzana - $42.00</option>
-                                </select>
-                                <small id="jugoHelp" class="form-text">Todos nuestros jugos son 100% naturales</small>
-                            </div>
+            <div class="producto-detalles">
+                <!-- Información del producto -->
+                <div class="product-info">
+                    <h2 id="productName" class="product-name">Jugo de Uva</h2>
+                    <p class="product-description">
+                        Delicioso jugo 100% natural, sin azúcares añadidos. Rico en vitaminas y antioxidantes 
+                        que fortalecen tu sistema inmunológico.
+                    </p>
+                    <div class="product-price">
+                        <span class="price-label">Precio:</span>
+                        <span class="price-value" id="currentPrice">$45.00 MXN</span>
+                    </div>
+                </div>
 
-                            <div class="form-group">
-                                <label for="selectCantidad" class="form-label">Cantidad:</label>
-                                <div class="quantity-selector">
-                                    <button type="button" class="quantity-btn minus" aria-label="Disminuir cantidad" id="btnMinus">
-                                        <i class="fas fa-minus" aria-hidden="true"></i>
-                                    </button>
-                                    <input type="number" id="selectCantidad" class="quantity-input" value="1" min="1" max="99" aria-label="Cantidad de productos">
-                                    <button type="button" class="quantity-btn plus" aria-label="Aumentar cantidad" id="btnPlus">
-                                        <i class="fas fa-plus" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </div>
+                <!-- Formulario de selección -->
+                <form class="product-form" aria-label="Formulario de compra">
+                    <div class="form-group">
+                        <label for="selectJugo" class="form-label">Seleccione su jugo:</label>
+                        <select id="selectJugo" class="form-select" aria-describedby="jugoHelp">
+                            <option value="jugo-vista.png" data-name="Jugo de Uva" data-price="45.00" data-id="1">Jugo de Uva - $45.00</option>
+                            <option value="jugo-defensa.png" data-name="Jugo de Naranja" data-price="48.00" data-id="2">Jugo de Naranja - $48.00</option>
+                            <option value="jugo-gastro.png" data-name="Jugo de Manzana" data-price="42.00" data-id="3">Jugo de Manzana - $42.00</option>
+                            <option value="jugo-antiox.png" data-name="Jugo Antiox" data-price="50.00" data-id="4">Jugo Antiox - $50.00</option>
+                        </select>
+                        <small id="jugoHelp" class="form-text">Todos nuestros jugos son 100% naturales</small>
+                    </div>
 
-                            <div class="total-section">
-                                <div class="total-info">
-                                    <span class="total-label">Total:</span>
-                                    <span class="total-value" id="totalPrice">$45.00 MXN</span>
-                                </div>
-                                <small class="shipping-info">
-                                    <i class="fas fa-truck" aria-hidden="true"></i>
-                                    Envío gratis en compras mayores a $500
-                                </small>
-                            </div>
-
-                            <div class="button-group">
-                                <button onclick="validarSesion()" type="button" class="btn-compra btn-add-cart" id="btn-add-cart">
-                                    <i class="fas fa-cart-plus" aria-hidden="true"></i>
-                                    <span>Añadir al Carrito</span>
-                                </button>
-                                <button onclick="validarSesion()" type="button" class="btn-compra btn-buy-now" id="btnComprar">
-                                    <i class="fas fa-bolt" aria-hidden="true"></i>
-                                    <span>Comprar Ahora</span>
-                                </button>
-                            </div>
-                        </form>
-
-                        <div class="product-features">
-                            <h3 class="features-title">Características:</h3>
-                            <ul class="features-list">
-                                <li><i class="fas fa-check-circle" aria-hidden="true"></i> 100% Natural</li>
-                                <li><i class="fas fa-check-circle" aria-hidden="true"></i> Sin conservadores</li>
-                                <li><i class="fas fa-check-circle" aria-hidden="true"></i> Rico en vitaminas</li>
-                                <li><i class="fas fa-check-circle" aria-hidden="true"></i> Hecho en México</li>
-                            </ul>
+                    <div class="form-group">
+                        <label for="selectCantidad" class="form-label">Cantidad:</label>
+                        <div class="quantity-selector">
+                            <button type="button" class="quantity-btn minus" aria-label="Disminuir cantidad" id="btnMinus">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" id="selectCantidad" class="quantity-input" value="1" min="1" max="99" aria-label="Cantidad de productos">
+                            <button type="button" class="quantity-btn plus" aria-label="Aumentar cantidad" id="btnPlus">
+                                <i class="fas fa-plus"></i>
+                            </button>
                         </div>
                     </div>
+
+                    <!-- Resumen del total -->
+                    <div class="total-section">
+                        <div class="total-info">
+                            <span class="total-label">Total:</span>
+                            <span class="total-value" id="totalPrice">$45.00 MXN</span>
+                        </div>
+                        <small class="shipping-info">
+                            <i class="fas fa-truck"></i>
+                            Envío gratis en compras mayores a $500
+                        </small>
+                    </div>
+
+                    <!-- Botones de acción -->
+                    <div class="button-group">
+                        <button onclick="validarSesion()" type="button" class="btn-compra btn-add-cart" id="btn-add-cart">
+                            <i class="fas fa-cart-plus"></i>
+                            <span>Añadir al Carrito</span>
+                        </button>
+                        <button onclick="validarSesion()" type="button" class="btn-compra btn-buy-now" id="btnCompra">
+                            <i class="fas fa-bolt"></i>
+                            <span>Comprar Ahora</span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Características del producto -->
+                <div class="product-features">
+                    <h3 class="features-title">Características:</h3>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check-circle"></i> 100% Natural</li>
+                        <li><i class="fas fa-check-circle"></i> Sin conservadores</li>
+                        <li><i class="fas fa-check-circle"></i> Rico en vitaminas</li>
+                        <li><i class="fas fa-check-circle"></i> Hecho en México</li>
+                        <li><i class="fas fa-check-circle"></i> Sin azúcares añadidos</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <!-- Sección de productos relacionados -->
+        <!-- Productos relacionados -->
         <section class="related-products" aria-labelledby="related-title">
             <div class="container">
                 <h2 id="related-title" class="section-title">También te puede interesar</h2>
                 <div class="products-grid">
                     <article class="product-card-mini">
-                        <img src="imagenes/jugo-antiox.png" alt="Jugo Antiox" width="150" height="150">
-                        <h3>Jugo Antiox</h3>
-                        <p class="price">$50.00 MXN</p>
-                        <button class="btn-add-mini" aria-label="Añadir Jugo Antiox al carrito">
-                            <i class="fas fa-plus" aria-hidden="true"></i>
+                        <img src="imagenes/jugo-antiox.png" alt="Jugo Antiox" width="120" height="120">
+                        <div class="product-info-mini">
+                            <h3>Jugo Antiox</h3>
+                            <p class="price">$50.00 MXN</p>
+                        </div>
+                        <button class="btn-add-mini" data-product="antiox" data-price="50.00" aria-label="Añadir Jugo Antiox al carrito">
+                            <i class="fas fa-plus"></i>
                         </button>
                     </article>
+                    
                     <article class="product-card-mini">
-                        <img src="imagenes/jugo-defensa.png" alt="Jugo Defensa" width="150" height="150">
-                        <h3>Jugo Defensa</h3>
-                        <p class="price">$48.00 MXN</p>
-                        <button class="btn-add-mini" aria-label="Añadir Jugo Defensa al carrito">
-                            <i class="fas fa-plus" aria-hidden="true"></i>
+                        <img src="imagenes/jugo-defensa.png" alt="Jugo Defensa" width="120" height="120">
+                        <div class="product-info-mini">
+                            <h3>Jugo Defensa</h3>
+                            <p class="price">$48.00 MXN</p>
+                        </div>
+                        <button class="btn-add-mini" data-product="defensa" data-price="48.00" aria-label="Añadir Jugo Defensa al carrito">
+                            <i class="fas fa-plus"></i>
                         </button>
                     </article>
+                    
                     <article class="product-card-mini">
-                        <img src="imagenes/jugo-gastro.png" alt="Jugo Gastro" width="150" height="150">
-                        <h3>Jugo Gastro</h3>
-                        <p class="price">$42.00 MXN</p>
-                        <button class="btn-add-mini" aria-label="Añadir Jugo Gastro al carrito">
-                            <i class="fas fa-plus" aria-hidden="true"></i>
+                        <img src="imagenes/jugo-gastro.png" alt="Jugo Gastro" width="120" height="120">
+                        <div class="product-info-mini">
+                            <h3>Jugo Gastro</h3>
+                            <p class="price">$42.00 MXN</p>
+                        </div>
+                        <button class="btn-add-mini" data-product="gastro" data-price="42.00" aria-label="Añadir Jugo Gastro al carrito">
+                            <i class="fas fa-plus"></i>
                         </button>
                     </article>
                 </div>
@@ -328,7 +332,6 @@
                     
                     <div class="theme-mode-container">
                         <div class="theme-toggle" role="radiogroup" aria-labelledby="theme-selector-title">
-                            <!-- <h3 id="theme-selector-title" class="sr-only">Seleccionar tema</h3> -->
                             
                             <div class="theme-option" id="lightTheme" role="radio" aria-checked="true" tabindex="0">
                                 <div class="theme-select" id="lightSelect"></div>
@@ -406,12 +409,11 @@
                 </section>
             </div>
 
-            <!-- Botón para cerrar -->
             <button id="closeSettingsBtn" class="close-button" aria-label="Cerrar configuración">&times;</button>
         </div>
     </div>
-
-    <script src="user-state.js"></script>
+    <!-- Scripts -->
+    <script src="user-state.js"></script> 
     <script src="theme.js"></script>
     <script src="compra.js"></script>
 </body>
